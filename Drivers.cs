@@ -7,16 +7,16 @@ namespace TruckSystem
     public class Drivers
     {
         public int DriverId { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string LivingAdress { get; set; }
-        public string LivingPlace { get; set; }
-        public string Id_CardNumber { get; set; }
-        public string Id_DrivingLicense { get; set; }
-        public string MobilePhone { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public DateTime Working_From_Date { get; set; }
-        public double Salary { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public string Adresa { get; set; }
+        public string Mesto { get; set; }
+        public string BrojLK { get; set; }
+        public string BrojVDozvole { get; set; }
+        public string Telefon { get; set; }
+        public DateTime DatumRodjenja { get; set; }
+        public DateTime PocetakRada { get; set; }
+        public double Plata { get; set; }
 
     }
 }

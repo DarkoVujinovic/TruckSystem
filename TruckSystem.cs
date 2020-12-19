@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,50 +22,87 @@ namespace TruckSystem
 
         private List<Drivers> GetDrivers()
         {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+
+            try
+            {
+                sqlConn.Open();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
+
+
+            // query
+
+            string strQuery = "Select * from Drivers";
+            SqlCommand command = new SqlCommand(strQuery, sqlConn);
+
+            SqlDataReader dataReader = command.ExecuteReader();
             var list = new List<Drivers>();
 
-            list.Add(new Drivers()
+            while (dataReader.Read())
             {
-                DriverId = 1,
-                Name = "Milan",
-                Surname = "Manojlovic",
-                LivingAdress = "Branislava Nusica 52",
-                LivingPlace = "Stara Pazova",
-                Id_CardNumber = "2315647897",
-                Id_DrivingLicense = "4564231354",
-                MobilePhone = "062627740",
-                DateOfBirth = DateTime.Parse("07/09/1990"),
-                Working_From_Date = DateTime.Parse("01/02/2013"),
-                Salary = 100000.00
+                Drivers drivers = new Drivers();
 
-            });
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    if (!(dataReader[i] is DBNull))
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                drivers.DriverId = Int32.Parse(((string)dataReader[i]).Trim());
+                                break;
+                            case 1:
+                                drivers.Ime = ((string)dataReader[i]).Trim();
+                                break;
+                            case 2:
+                                drivers.Prezime = ((string)dataReader[i]).Trim();
+                                break;
+                            case 3:
+                                drivers.Adresa = ((string)dataReader[i]).Trim();
+                                break;
+                            case 4:
+                                drivers.Mesto = ((string)dataReader[i]).Trim();
+                                break;
+                            case 5:
+                                drivers.BrojLK = ((string)dataReader[i]).Trim();
+                                break;
+                            case 6:
+                                drivers.BrojVDozvole = ((string)dataReader[i]).Trim();
+                                break;
+                            case 7:
+                                drivers.Telefon = ((string)dataReader[i]).Trim();
+                                break;
+                            case 8:
+                                drivers.DatumRodjenja = (DateTime)dataReader[i];
+                                break;
+                            case 9:
+                                drivers.PocetakRada = (DateTime)dataReader[i];
+                                break;
+                            case 10:
+                                drivers.Plata = Double.Parse(((string)dataReader[i]).Trim());
+                                break;
+                        }
+                    }
 
-            list.Add(new Drivers()
-            {
-                DriverId = 2,
-                Name = "Ilija",
-                Surname = "Manojlovic",
-                LivingAdress = "Branislava Nusica 52",
-                LivingPlace = "Stara Pazova",
-                Id_CardNumber = "6346346463",
-                Id_DrivingLicense = "44444444444",
-                MobilePhone = "062627740",
-                DateOfBirth = DateTime.Parse("07/09/1985"),
-                Working_From_Date = DateTime.Parse("01/02/2013"),
-                Salary = 100000.00
+                }
 
-            });
+                list.Add(drivers);
+            }
+
+            sqlConn.Close();
 
             return list;
-
         }
 
         private void LoadDrivers()
         {
             Drivers = GetDrivers();
-
-            var drivers = this.Drivers;
-            dataGridView1.DataSource = drivers;
+            dataGridView1.DataSource = Drivers;
         }
 
         private void button1_Click(object sender, EventArgs e)
