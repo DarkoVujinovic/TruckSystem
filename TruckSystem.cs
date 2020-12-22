@@ -105,9 +105,83 @@ namespace TruckSystem
             dataGridView1.DataSource = Drivers;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void UpdateDriver(Drivers driver)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+            
+            // query
+            command.CommandText =   " UPDATE Drivers SET " +
+                                    " name = @name, " +
+                                    " surname = @surname, " +
+                                    " living_address = @living_address, " +
+                                    " living_place = @living_place, " +
+                                    " id_cardnumber =@id_cardnumber, " +
+                                    " id_drivinglicense = @id_drivinglicense, " +
+                                    " mobilephone = @mobilephone, " +
+                                    " dateofbirth = @dateofbirth, " +
+                                    " working_from_date = @working_from_date, " +
+                                    " salary = @salary " +
+                                    " WHERE driver_id = @driveId ";
+
+            command.Parameters.AddWithValue("@driveId", driver.DriverId);
+            command.Parameters.AddWithValue("@salary", driver.Plata);
+            command.Parameters.AddWithValue("@working_from_date", driver.PocetakRada.Date.ToString());
+            command.Parameters.AddWithValue("@dateofbirth", driver.DatumRodjenja.Date.ToString());
+            command.Parameters.AddWithValue("@mobilephone", driver.Telefon);
+            command.Parameters.AddWithValue("@id_drivinglicense", driver.BrojVDozvole);
+            command.Parameters.AddWithValue("@id_cardnumber", driver.BrojLK);
+            command.Parameters.AddWithValue("@living_place", driver.Mesto);
+            command.Parameters.AddWithValue("@living_address", driver.Adresa);
+            command.Parameters.AddWithValue("@surname", driver.Prezime);
+            command.Parameters.AddWithValue("@name", driver.Ime);
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                MessageBox.Show(ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadDrivers();
+        }
+
+        private void LoadDrivers_button_Click(object sender, EventArgs e)
         {
             LoadDrivers();
+        }
+
+        private void UpdateDriver_button_Click(object sender, EventArgs e)
+        {
+            // get row index 
+            int Index = 0;
+
+            try
+            {
+                Index = dataGridView1.CurrentCell.RowIndex;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Molimo prvo učitajte vozače na listu pritiskom na dugme 'Učitaj Vozače'. ", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            UpdateDriver ud = new UpdateDriver(this);
+            Drivers driver = new Drivers();
+            driver = this.Drivers[Index];
+
+            ud.LoadSelectedDriver(driver);
+            ud.ShowDialog();
         }
     }
 }

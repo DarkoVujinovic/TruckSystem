@@ -4,5 +4,8 @@
     <Compile Update="TruckSystem.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UpdateDriver.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

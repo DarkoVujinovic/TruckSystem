@@ -31,9 +31,9 @@ namespace TruckSystem
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.AddDriver_button = new System.Windows.Forms.Button();
+            this.UpdateDriver_button = new System.Windows.Forms.Button();
+            this.LoadDrivers_button = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -60,9 +60,9 @@ namespace TruckSystem
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.AddDriver_button);
+            this.tabPage1.Controls.Add(this.UpdateDriver_button);
+            this.tabPage1.Controls.Add(this.LoadDrivers_button);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
@@ -72,33 +72,34 @@ namespace TruckSystem
             this.tabPage1.Text = "Vozači";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // AddDriver_button
             // 
-            this.button3.Location = new System.Drawing.Point(12, 193);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(147, 66);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Dodaj Vozača";
-            this.button3.UseVisualStyleBackColor = true;
+            this.AddDriver_button.Location = new System.Drawing.Point(12, 193);
+            this.AddDriver_button.Name = "AddDriver_button";
+            this.AddDriver_button.Size = new System.Drawing.Size(147, 66);
+            this.AddDriver_button.TabIndex = 3;
+            this.AddDriver_button.Text = "Dodaj Vozača";
+            this.AddDriver_button.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // UpdateDriver_button
             // 
-            this.button2.Location = new System.Drawing.Point(12, 109);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 66);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Izmeni Vozača";
-            this.button2.UseVisualStyleBackColor = true;
+            this.UpdateDriver_button.Location = new System.Drawing.Point(12, 109);
+            this.UpdateDriver_button.Name = "UpdateDriver_button";
+            this.UpdateDriver_button.Size = new System.Drawing.Size(147, 66);
+            this.UpdateDriver_button.TabIndex = 2;
+            this.UpdateDriver_button.Text = "Izmeni Vozača";
+            this.UpdateDriver_button.UseVisualStyleBackColor = true;
+            this.UpdateDriver_button.Click += new System.EventHandler(this.UpdateDriver_button_Click);
             // 
-            // button1
+            // LoadDrivers_button
             // 
-            this.button1.Location = new System.Drawing.Point(12, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 66);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Učitaj Vozače";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.LoadDrivers_button.Location = new System.Drawing.Point(12, 25);
+            this.LoadDrivers_button.Name = "LoadDrivers_button";
+            this.LoadDrivers_button.Size = new System.Drawing.Size(147, 66);
+            this.LoadDrivers_button.TabIndex = 1;
+            this.LoadDrivers_button.Text = "Učitaj Vozače";
+            this.LoadDrivers_button.UseVisualStyleBackColor = true;
+            this.LoadDrivers_button.Click += new System.EventHandler(this.LoadDrivers_button_Click);
             // 
             // dataGridView1
             // 
@@ -108,6 +109,7 @@ namespace TruckSystem
             this.dataGridView1.Location = new System.Drawing.Point(165, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1183, 256);
             this.dataGridView1.TabIndex = 0;
             // 
@@ -153,10 +155,10 @@ namespace TruckSystem
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button LoadDrivers_button;
+        private System.Windows.Forms.Button UpdateDriver_button;
+        private System.Windows.Forms.Button AddDriver_button;
     }
 }
 
