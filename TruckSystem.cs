@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dapper;
 using Dapper.Contrib.Extensions;
+using NLog;
 
 namespace TruckSystem
 {
@@ -17,6 +18,9 @@ namespace TruckSystem
     {
         public List<Drivers> Drivers { get; set; }
         public int lastSelectedIndex = 0;
+
+        public LogFactory logManager = LogManager.LoadConfiguration("nlog.config");
+        public Logger log = LogManager.GetCurrentClassLogger();
 
         public TruckSystem()
         {
@@ -231,8 +235,9 @@ namespace TruckSystem
                 Index = dataGridView1.CurrentCell.RowIndex;
                 lastSelectedIndex = Index;
             }
-            catch(Exception ex)
+            catch
             {
+                log.Debug("Drivers not loaded correctly, please reload drivers.");
                 MessageBox.Show("Molimo prvo učitajte vozače na listu pritiskom na dugme 'Učitaj Vozače'. ", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
