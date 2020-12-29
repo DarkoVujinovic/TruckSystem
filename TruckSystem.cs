@@ -17,7 +17,10 @@ namespace TruckSystem
     public partial class TruckSystem : Form
     {
         public List<Drivers> Drivers { get; set; }
-        public int lastSelectedIndex = 0;
+        public List<Vehicles> Vehicles { get; set; }
+
+        public int lastSelectedIndexDrivers = 0;
+        public int lastSelectedIndexVehicles = 0;
 
         public LogFactory logManager = LogManager.LoadConfiguration("nlog.config");
         public Logger log = LogManager.GetCurrentClassLogger();
@@ -27,7 +30,7 @@ namespace TruckSystem
             InitializeComponent();
         }
 
-        private List<Drivers> GetDrivers()
+        private static List<Drivers> GetDrivers()
         {
             string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
             SqlConnection sqlConn = new SqlConnection(connetionString);
@@ -108,13 +111,103 @@ namespace TruckSystem
 
         private void LoadDrivers()
         {
-            // load drivers in dataGridView1
+            // load drivers in dataGridView_Drivers
             Drivers = GetDrivers();
-            dataGridView1.DataSource = Drivers;
+            dataGridView_Drivers.DataSource = Drivers;
 
             // select last selected column in dataGridView1
-            dataGridView1.CurrentCell = dataGridView1.Rows[lastSelectedIndex].Cells[lastSelectedIndex];
-            dataGridView1.Rows[lastSelectedIndex].Selected = true; 
+            dataGridView_Drivers.CurrentCell = dataGridView_Drivers.Rows[lastSelectedIndexDrivers].Cells[lastSelectedIndexDrivers];
+            dataGridView_Drivers.Rows[lastSelectedIndexDrivers].Selected = true; 
+        }
+
+        private void LoadVehicles()
+        {
+            // load vehicles in dataGridView_Vehicles
+            Vehicles = GetVehicles();
+            dataGridView_Vehicles.DataSource = Vehicles;
+
+            // select last selected column in dataGridView1
+            dataGridView_Vehicles.CurrentCell = dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Cells[lastSelectedIndexVehicles];
+            dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Selected = true;
+        }
+
+        private static List<Vehicles> GetVehicles()
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+
+            try
+            {
+                sqlConn.Open();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
+
+
+            // query
+
+            string strQuery = "Select * from Trucks";
+            SqlCommand command = new SqlCommand(strQuery, sqlConn);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+            var list = new List<Vehicles>();
+
+            while (dataReader.Read())
+            {
+                Vehicles vehicles = new Vehicles();
+
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    if (!(dataReader[i] is DBNull))
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                vehicles.VoziloId = Int32.Parse(dataReader[i].ToString());
+                                break;
+                            case 1:
+                                vehicles.Proizvođač = ((string)dataReader[i]).Trim();
+                                break;
+                            case 2:
+                                vehicles.TipVozila = ((string)dataReader[i]).Trim();
+                                break;
+                            case 3:
+                                vehicles.OznakaVozila = ((string)dataReader[i]).Trim();
+                                break;
+                            case 4:
+                                vehicles.RegistarskiBroj = ((string)dataReader[i]).Trim();
+                                break;
+                            case 5:
+                                vehicles.DatumKupovine = (DateTime)dataReader[i];
+                                break;
+                            case 6:
+                                vehicles.DatumRegistracije = (DateTime)dataReader[i];
+                                break;
+                            case 7:
+                                vehicles.PočetnaKilometraža = ((string)dataReader[i]).Trim();
+                                break;
+                            case 8:
+                                vehicles.BrojŠasije = ((string)dataReader[i]).Trim();
+                                break;
+                            case 9:
+                                vehicles.DozvoljenaNosivost = ((string)dataReader[i]).Trim();
+                                break;
+                            case 10:
+                                vehicles.DimenzijePneumatika = ((string)dataReader[i]).Trim();
+                                break;
+                        }
+                    }
+
+                }
+
+                list.Add(vehicles);
+            }
+
+            sqlConn.Close();
+
+            return list;
         }
 
         public void AddDriver(Drivers driver)
@@ -232,8 +325,8 @@ namespace TruckSystem
 
             try
             {
-                Index = dataGridView1.CurrentCell.RowIndex;
-                lastSelectedIndex = Index;
+                Index = dataGridView_Drivers.CurrentCell.RowIndex;
+                lastSelectedIndexDrivers = Index;
             }
             catch
             {
@@ -255,6 +348,145 @@ namespace TruckSystem
             AddDriver addDriver = new AddDriver(this);
             //addDriver.AddNewDriver(driver);
             addDriver.ShowDialog();
+        }
+
+        private void LoadVehicles_button_Click(object sender, EventArgs e)
+        {
+            LoadVehicles();
+        }
+
+        private void EditVehicle_button_Click(object sender, EventArgs e)
+        {
+            // get row index 
+            int Index = 0;
+
+            try
+            {
+                Index = dataGridView_Vehicles.CurrentCell.RowIndex;
+                lastSelectedIndexVehicles = Index;
+            }
+            catch
+            {
+                log.Debug("Vehicles not loaded correctly, please reload vehicles.");
+                MessageBox.Show("Molimo prvo učitajte vozila na listu pritiskom na dugme 'Učitaj Vozila'. ", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            EditVehicle editVehicle = new EditVehicle(this);
+            Vehicles vehicle = new Vehicles();
+            vehicle = this.Vehicles[Index];
+
+            editVehicle.LoadSelectedVehicle(vehicle);
+            editVehicle.ShowDialog();
+        }
+
+        private void AddNewVehicle_button_Click(object sender, EventArgs e)
+        {
+            AddNewVehicle addNewVehicle = new AddNewVehicle(this);
+            addNewVehicle.ShowDialog();
+        }
+
+        public void AddVehicle(Vehicles vehicle)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText = " INSERT INTO Trucks " +
+                                    "(truck_manufacturer, truck_type, special_truck_label, license_plate," +
+                                    " buy_date, registration_date, odometer_km," +
+                                    " chassis_number, load_capacity, tyre_dymension)" +
+                                    " VALUES (@truck_manufacturer, " +
+                                    " @truck_type, " +
+                                    " @special_truck_label, " +
+                                    " @license_plate, " +
+                                    " @buy_date, " +
+                                    " @registration_date, " +
+                                    " @odometer_km, " +
+                                    " @chassis_number, " +
+                                    " @load_capacity, " +
+                                    " @tyre_dymension) ";
+
+            command.Parameters.AddWithValue("@truck_manufacturer", vehicle.Proizvođač);
+            command.Parameters.AddWithValue("@truck_type", vehicle.TipVozila);
+            command.Parameters.AddWithValue("@special_truck_label", vehicle.OznakaVozila);
+            command.Parameters.AddWithValue("@license_plate", vehicle.RegistarskiBroj);
+            command.Parameters.AddWithValue("@buy_date", vehicle.DatumKupovine.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@registration_date", vehicle.DatumRegistracije.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@odometer_km", vehicle.PočetnaKilometraža);
+            command.Parameters.AddWithValue("@chassis_number", vehicle.BrojŠasije);
+            command.Parameters.AddWithValue("@load_capacity", vehicle.DozvoljenaNosivost);
+            command.Parameters.AddWithValue("@tyre_dymension", vehicle.DimenzijePneumatika);         
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                MessageBox.Show(ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadVehicles();
+        }
+
+        public void EditVehicle(Vehicles vehicle)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText = " UPDATE Trucks SET " +
+                                    " truck_manufacturer = @truck_manufacturer, " +
+                                    " truck_type = @truck_type, " +
+                                    " special_truck_label = @special_truck_label, " +
+                                    " license_plate = @license_plate, " +
+                                    " buy_date =@buy_date, " +
+                                    " registration_date = @registration_date, " +
+                                    " odometer_km = @odometer_km, " +
+                                    " chassis_number = @chassis_number, " +
+                                    " load_capacity = @load_capacity, " +
+                                    " tyre_dymension = @tyre_dymension " +
+                                    " WHERE truck_id = @truck_id ";
+
+            command.Parameters.AddWithValue("@truck_id", vehicle.VoziloId);
+            command.Parameters.AddWithValue("@truck_manufacturer", vehicle.Proizvođač);
+            command.Parameters.AddWithValue("@truck_type", vehicle.TipVozila);
+            command.Parameters.AddWithValue("@special_truck_label", vehicle.OznakaVozila);
+            command.Parameters.AddWithValue("@license_plate", vehicle.RegistarskiBroj);
+            command.Parameters.AddWithValue("@buy_date", vehicle.DatumKupovine.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@registration_date", vehicle.DatumRegistracije.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@odometer_km", vehicle.PočetnaKilometraža);
+            command.Parameters.AddWithValue("@chassis_number", vehicle.BrojŠasije);
+            command.Parameters.AddWithValue("@load_capacity", vehicle.DozvoljenaNosivost);
+            command.Parameters.AddWithValue("@tyre_dymension", vehicle.DimenzijePneumatika);
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                MessageBox.Show(ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadVehicles();
         }
     }
 }

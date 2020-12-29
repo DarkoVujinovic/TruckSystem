@@ -52,7 +52,6 @@ namespace TruckSystem
         private void UpdateDriver_ApplyButton_Click(object sender, EventArgs e)
         {
             Drivers driver = new Drivers();
-            TruckSystem truckSystem = new TruckSystem();
 
             driver.Ime = this.textBox1.Text.ToString();
             driver.Prezime = this.textBox2.Text;
@@ -90,7 +89,6 @@ namespace TruckSystem
                 driver.Mesto == OriginalCopy.Mesto &&
                 driver.BrojLK == OriginalCopy.BrojLK &&
                 driver.BrojVDozvole == OriginalCopy.BrojVDozvole &&
-                driver.BrojLK == OriginalCopy.BrojLK &&
                 driver.Telefon == OriginalCopy.Telefon &&
                 driver.DatumRodjenja == OriginalCopy.DatumRodjenja &&
                 driver.PocetakRada == OriginalCopy.PocetakRada &&

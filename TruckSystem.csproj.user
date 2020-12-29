@@ -4,6 +4,12 @@
     <Compile Update="AddDriver.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AddNewVehicle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditVehicle.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="TruckSystem.cs">
       <SubType>Form</SubType>
     </Compile>
