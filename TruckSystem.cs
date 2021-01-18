@@ -488,5 +488,20 @@ namespace TruckSystem
             //refresh data
             LoadVehicles();
         }
+
+        private void LoadInvoices_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EditInvoice_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddNewInvoice_button_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

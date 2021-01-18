@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="AddDriver.cs">
+    <Compile Update="Drivers\AddDriver.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="AddNewVehicle.cs">
+    <Compile Update="Vehicles\AddNewVehicle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="EditVehicle.cs">
+    <Compile Update="Vehicles\EditVehicle.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TruckSystem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UpdateDriver.cs">
+    <Compile Update="Drivers\UpdateDriver.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
