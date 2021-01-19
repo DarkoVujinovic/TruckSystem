@@ -29,7 +29,7 @@ namespace TruckSystem
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView_Invoices = new System.Windows.Forms.TabControl();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDrivers = new System.Windows.Forms.TabPage();
             this.AddDriver_button = new System.Windows.Forms.Button();
             this.UpdateDriver_button = new System.Windows.Forms.Button();
@@ -44,31 +44,31 @@ namespace TruckSystem
             this.AddNewInvoice_button = new System.Windows.Forms.Button();
             this.EditInvoice_button = new System.Windows.Forms.Button();
             this.LoadInvoices_button = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView_Invoices.SuspendLayout();
+            this.dataGridView_Invoices = new System.Windows.Forms.DataGridView();
+            this.tabControl1.SuspendLayout();
             this.tabPageDrivers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Drivers)).BeginInit();
             this.tabPageVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Vehicles)).BeginInit();
             this.tabPageInvoices.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Invoices)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView_Invoices
+            // tabControl1
             // 
-            this.dataGridView_Invoices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView_Invoices.Controls.Add(this.tabPageDrivers);
-            this.dataGridView_Invoices.Controls.Add(this.tabPageVehicles);
-            this.dataGridView_Invoices.Controls.Add(this.tabPageInvoices);
-            this.dataGridView_Invoices.Location = new System.Drawing.Point(13, 13);
-            this.dataGridView_Invoices.Multiline = true;
-            this.dataGridView_Invoices.Name = "dataGridView_Invoices";
-            this.dataGridView_Invoices.SelectedIndex = 0;
-            this.dataGridView_Invoices.Size = new System.Drawing.Size(1120, 536);
-            this.dataGridView_Invoices.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-            this.dataGridView_Invoices.TabIndex = 0;
+            this.tabControl1.Controls.Add(this.tabPageDrivers);
+            this.tabControl1.Controls.Add(this.tabPageVehicles);
+            this.tabControl1.Controls.Add(this.tabPageInvoices);
+            this.tabControl1.Location = new System.Drawing.Point(13, 13);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "dataGridView_Invoices";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1120, 536);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPageDrivers
             // 
@@ -197,7 +197,7 @@ namespace TruckSystem
             this.tabPageInvoices.Controls.Add(this.AddNewInvoice_button);
             this.tabPageInvoices.Controls.Add(this.EditInvoice_button);
             this.tabPageInvoices.Controls.Add(this.LoadInvoices_button);
-            this.tabPageInvoices.Controls.Add(this.dataGridView1);
+            this.tabPageInvoices.Controls.Add(this.dataGridView_Invoices);
             this.tabPageInvoices.Location = new System.Drawing.Point(4, 24);
             this.tabPageInvoices.Name = "tabPageInvoices";
             this.tabPageInvoices.Padding = new System.Windows.Forms.Padding(3);
@@ -238,37 +238,37 @@ namespace TruckSystem
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView_Invoices.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridView1.Location = new System.Drawing.Point(156, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(953, 259);
-            this.dataGridView1.TabIndex = 8;
+            this.dataGridView_Invoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView_Invoices.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView_Invoices.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView_Invoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Invoices.GridColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridView_Invoices.Location = new System.Drawing.Point(156, 3);
+            this.dataGridView_Invoices.Name = "dataGridView_Invoices";
+            this.dataGridView_Invoices.ReadOnly = true;
+            this.dataGridView_Invoices.RowTemplate.Height = 25;
+            this.dataGridView_Invoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Invoices.Size = new System.Drawing.Size(953, 259);
+            this.dataGridView_Invoices.TabIndex = 8;
             // 
             // TruckSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1145, 561);
-            this.Controls.Add(this.dataGridView_Invoices);
+            this.Controls.Add(this.tabControl1);
             this.Name = "TruckSystem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TruckSystem";
-            this.dataGridView_Invoices.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.tabPageDrivers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Drivers)).EndInit();
             this.tabPageVehicles.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Vehicles)).EndInit();
             this.tabPageInvoices.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Invoices)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -288,11 +288,11 @@ namespace TruckSystem
         private System.Windows.Forms.Button EditVehicle_button;
         private System.Windows.Forms.Button LoadVehicles_button;
         private System.Windows.Forms.Button AddNewVehicle_button;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_Invoices;
         private System.Windows.Forms.Button LoadInvoices_button;
         private System.Windows.Forms.Button AddNewInvoice_button;
         private System.Windows.Forms.Button EditInvoice_button;
-        private System.Windows.Forms.TabControl dataGridView_Invoices;
+        private System.Windows.Forms.TabControl tabControl1; 
     }
 }
 

@@ -496,12 +496,13 @@ namespace TruckSystem
 
         private void EditInvoice_button_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void AddNewInvoice_button_Click(object sender, EventArgs e)
         {
-
+            AddNewInvoice addNewInvoice = new AddNewInvoice(this);
+            addNewInvoice.ShowDialog();
         }
     }
 }

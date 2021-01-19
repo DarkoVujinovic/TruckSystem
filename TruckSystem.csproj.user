@@ -4,6 +4,12 @@
     <Compile Update="Drivers\AddDriver.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Invoices\AddNewInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Invoices\EditInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Vehicles\AddNewVehicle.cs">
       <SubType>Form</SubType>
     </Compile>
