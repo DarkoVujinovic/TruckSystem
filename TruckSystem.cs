@@ -18,9 +18,11 @@ namespace TruckSystem
     {
         public List<Drivers> Drivers { get; set; }
         public List<Vehicles> Vehicles { get; set; }
+        public List<Invoices> Invoices { get; set; }
 
         public int lastSelectedIndexDrivers = 0;
         public int lastSelectedIndexVehicles = 0;
+        public int lastSelectedIndexInvoices = 0;
 
         public LogFactory logManager = LogManager.LoadConfiguration("nlog.config");
         public Logger log = LogManager.GetCurrentClassLogger();
@@ -129,6 +131,87 @@ namespace TruckSystem
             // select last selected column in dataGridView1
             dataGridView_Vehicles.CurrentCell = dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Cells[lastSelectedIndexVehicles];
             dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Selected = true;
+        }
+
+        private void LoadInvoices()
+        {
+            // load vehicles in dataGridView_Vehicles
+            Invoices = GetInvoices();
+            dataGridView_Invoices.DataSource = Invoices;
+
+            // select last selected column in dataGridView1
+            dataGridView_Invoices.CurrentCell = dataGridView_Invoices.Rows[lastSelectedIndexInvoices].Cells[lastSelectedIndexInvoices];
+            dataGridView_Invoices.Rows[lastSelectedIndexInvoices].Selected = true;
+        }
+
+        private static List<Invoices> GetInvoices()
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+
+            try
+            {
+                sqlConn.Open();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
+
+
+            // query
+
+            string strQuery = "Select * from Invoices";
+            SqlCommand command = new SqlCommand(strQuery, sqlConn);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+            var list = new List<Invoices>();
+
+            while (dataReader.Read())
+            {
+                Invoices invoices = new Invoices();
+
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    if (!(dataReader[i] is DBNull))
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                invoices.FakturaId = Int32.Parse(dataReader[i].ToString());
+                                break;
+                            case 1:
+                                invoices.NazivFirme = ((string)dataReader[i]).Trim();
+                                break;
+                            case 2:
+                                invoices.DatumIsporuke = (DateTime)dataReader[i];
+                                break;
+                            case 3:
+                                invoices.OsnovnaCena = ((string)dataReader[i]).Trim();
+                                break;
+                            case 4:
+                                invoices.PDV = ((string)dataReader[i]).Trim();
+                                break;
+                            case 5:
+                                invoices.KonačnaCena = ((string)dataReader[i]).Trim();
+                                break;
+                            case 6:
+                                invoices.DriverId = dataReader[i].ToString();
+                                break;
+                            case 7:
+                                invoices.VoziloId = dataReader[i].ToString();
+                                break;
+                        }
+                    }
+
+                }
+
+                list.Add(invoices);
+            }
+
+            sqlConn.Close();
+
+            return list;
         }
 
         private static List<Vehicles> GetVehicles()
@@ -489,14 +572,126 @@ namespace TruckSystem
             LoadVehicles();
         }
 
+        public void AddInvoice(Invoices invoice)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText = " INSERT INTO Invoices " +
+                                    "(company_name, delivery_date, base_value, vat," +
+                                    " final_value, driver_id, truck_id)" +
+                                    " VALUES (@company_name, " +
+                                    " @delivery_date, " +
+                                    " @base_value, " +
+                                    " @vat, " +
+                                    " @final_value, " +
+                                    " @driver_id, " +
+                                    " @truck_id) ";
+            
+            //command.Parameters.AddWithValue("@invoice_id", invoice.FakturaId);
+            command.Parameters.AddWithValue("@truck_id", invoice.VoziloId);
+            command.Parameters.AddWithValue("@driver_id", invoice.DriverId);
+            command.Parameters.AddWithValue("@final_value", invoice.KonačnaCena);
+            command.Parameters.AddWithValue("@vat", invoice.PDV);
+            command.Parameters.AddWithValue("@base_value", invoice.OsnovnaCena);
+            command.Parameters.AddWithValue("@delivery_date", invoice.DatumIsporuke.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@company_name", invoice.NazivFirme);
+            
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                MessageBox.Show(ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadInvoices();
+        }
+
+        public void EditInvoice(Invoices invoice)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText =   " UPDATE Invoices SET " +
+                                    " truck_id = @truck_id, " +
+                                    " driver_id =@driver_id, " +
+                                    " final_value = @final_value, " +
+                                    " vat = @vat, " +
+                                    " base_value = @base_value, " +
+                                    " delivery_date = @delivery_date, " +
+                                    " company_name = @company_name " +
+                                    " WHERE invoice_id = @invoice_id ";
+
+            command.Parameters.AddWithValue("@invoice_id", invoice.FakturaId);
+            command.Parameters.AddWithValue("@truck_id", invoice.VoziloId);
+            command.Parameters.AddWithValue("@driver_id", invoice.DriverId);
+            command.Parameters.AddWithValue("@final_value", invoice.KonačnaCena);
+            command.Parameters.AddWithValue("@vat", invoice.PDV);
+            command.Parameters.AddWithValue("@base_value", invoice.OsnovnaCena);
+            command.Parameters.AddWithValue("@delivery_date", invoice.DatumIsporuke.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@company_name", invoice.NazivFirme);
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                MessageBox.Show(ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadInvoices();
+        }
+
         private void LoadInvoices_button_Click(object sender, EventArgs e)
         {
-
+            LoadInvoices();
         }
 
         private void EditInvoice_button_Click(object sender, EventArgs e)
         {
-            
+            // get row index 
+            int Index = 0;
+
+            try
+            {
+                Index = dataGridView_Invoices.CurrentCell.RowIndex;
+                lastSelectedIndexInvoices = Index;
+            }
+            catch
+            {
+                log.Debug("Invoices not loaded correctly, please reload invoices.");
+                MessageBox.Show("Molimo prvo učitajte fakture na listu pritiskom na dugme 'Učitaj Fakture'. ", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            EditInvoice editInvoice = new EditInvoice(this);
+            Invoices invoices = new Invoices();
+            invoices = this.Invoices[Index];
+
+            editInvoice.LoadSelectedInvoice(invoices);
+            editInvoice.ShowDialog();
+
         }
 
         private void AddNewInvoice_button_Click(object sender, EventArgs e)
