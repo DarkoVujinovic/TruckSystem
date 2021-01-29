@@ -19,10 +19,12 @@ namespace TruckSystem
         public List<Drivers> Drivers { get; set; }
         public List<Vehicles> Vehicles { get; set; }
         public List<Invoices> Invoices { get; set; }
+        public List<Companies> Companies { get; set; }
 
         public int lastSelectedIndexDrivers = 0;
         public int lastSelectedIndexVehicles = 0;
         public int lastSelectedIndexInvoices = 0;
+        public int lastSelectedIndexCompanies = 0;
 
         public LogFactory logManager = LogManager.LoadConfiguration("nlog.config");
         public Logger log = LogManager.GetCurrentClassLogger();
@@ -923,5 +925,102 @@ namespace TruckSystem
         }
 
         //-------------------------INVOICES SECTION END-------------------------------//
+
+        //-------------------------COMPANIES SECTION BEGIN-------------------------------//
+        private static List<Companies> GetCompanies()
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+
+            try
+            {
+                sqlConn.Open();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
+
+            // query
+            string strQuery = "SELECT * FROM Companies";
+            SqlCommand command = new SqlCommand(strQuery, sqlConn);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+            var list = new List<Companies>();
+
+            while (dataReader.Read())
+            {
+                Companies companies = new Companies();
+
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    if (!(dataReader[i] is DBNull))
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                companies.FirmaId= Int32.Parse(dataReader[i].ToString());
+                                break;
+                            case 1:
+                                companies.NazivFirme = ((string)dataReader[i]).Trim();
+                                break;
+                            case 2:
+                                companies.Adresa = ((string)dataReader[i]).Trim();
+                                break;
+                            case 3:
+                                companies.Grad = ((string)dataReader[i]).Trim();
+                                break;
+                            case 4:
+                                companies.Vlasnik = ((string)dataReader[i]).Trim();
+                                break;
+                            case 5:
+                                companies.PIB = ((string)dataReader[i]).Trim();
+                                break;
+                            case 6:
+                                companies.BrojBankovnogRačuna = ((string)dataReader[i]).Trim();
+                                break;
+                            case 7:
+                                companies.KontaktTelefon = ((string)dataReader[i]).Trim();
+                                break;
+                            case 8:
+                                companies.EMail = ((string)dataReader[i]).Trim();
+                                break;
+                        }
+                    }
+
+                }
+
+                list.Add(companies);
+            }
+
+            sqlConn.Close();
+
+            return list;
+        }
+
+        private void LoadCompanies()
+        {
+            // load drivers in dataGridView_Companies
+            Companies = GetCompanies();
+            dataGridView_Companies.DataSource = Companies;
+
+            if (lastSelectedIndexCompanies < 0)
+            {
+                lastSelectedIndexCompanies = 0;
+                // select last selected column in dataGridView1
+                dataGridView_Companies.CurrentCell = dataGridView_Companies.Rows[lastSelectedIndexCompanies].Cells[lastSelectedIndexCompanies];
+                dataGridView_Companies.Rows[lastSelectedIndexCompanies].Selected = true;
+            }
+            else
+            {
+                dataGridView_Companies.CurrentCell = dataGridView_Companies.Rows[lastSelectedIndexCompanies].Cells[lastSelectedIndexCompanies];
+                dataGridView_Companies.Rows[lastSelectedIndexCompanies].Selected = true;
+            }
+        }
+
+        private void LoadCompanies_button_Click(object sender, EventArgs e)
+        {
+            LoadCompanies();
+        }
     }
 }

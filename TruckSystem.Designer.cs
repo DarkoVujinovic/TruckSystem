@@ -51,6 +51,12 @@ namespace TruckSystem
             this.tabPageStatistics = new System.Windows.Forms.TabPage();
             this.tabPageExpenses = new System.Windows.Forms.TabPage();
             this.tabPageReminder = new System.Windows.Forms.TabPage();
+            this.tabPageCompanies = new System.Windows.Forms.TabPage();
+            this.dataGridView_Companies = new System.Windows.Forms.DataGridView();
+            this.DeleteCompany_button = new System.Windows.Forms.Button();
+            this.AddNewCompany_button = new System.Windows.Forms.Button();
+            this.EditCompany_button = new System.Windows.Forms.Button();
+            this.LoadCompanies_button = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageDrivers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Drivers)).BeginInit();
@@ -58,6 +64,8 @@ namespace TruckSystem
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Vehicles)).BeginInit();
             this.tabPageInvoices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Invoices)).BeginInit();
+            this.tabPageCompanies.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Companies)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -71,6 +79,7 @@ namespace TruckSystem
             this.tabControl1.Controls.Add(this.tabPageStatistics);
             this.tabControl1.Controls.Add(this.tabPageExpenses);
             this.tabControl1.Controls.Add(this.tabPageReminder);
+            this.tabControl1.Controls.Add(this.tabPageCompanies);
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -110,7 +119,7 @@ namespace TruckSystem
             this.AddDriver_button.Name = "AddDriver_button";
             this.AddDriver_button.Size = new System.Drawing.Size(147, 50);
             this.AddDriver_button.TabIndex = 3;
-            this.AddDriver_button.Text = "Dodaj Vozača";
+            this.AddDriver_button.Text = "Dodaj Novog Vozača";
             this.AddDriver_button.UseVisualStyleBackColor = true;
             this.AddDriver_button.Click += new System.EventHandler(this.AddDriver_button_Click);
             // 
@@ -325,6 +334,75 @@ namespace TruckSystem
             this.tabPageReminder.Text = "Podsetnik";
             this.tabPageReminder.UseVisualStyleBackColor = true;
             // 
+            // tabPageCompanies
+            // 
+            this.tabPageCompanies.Controls.Add(this.dataGridView_Companies);
+            this.tabPageCompanies.Controls.Add(this.DeleteCompany_button);
+            this.tabPageCompanies.Controls.Add(this.AddNewCompany_button);
+            this.tabPageCompanies.Controls.Add(this.EditCompany_button);
+            this.tabPageCompanies.Controls.Add(this.LoadCompanies_button);
+            this.tabPageCompanies.Location = new System.Drawing.Point(4, 24);
+            this.tabPageCompanies.Name = "tabPageCompanies";
+            this.tabPageCompanies.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCompanies.Size = new System.Drawing.Size(1112, 702);
+            this.tabPageCompanies.TabIndex = 6;
+            this.tabPageCompanies.Text = "Firme";
+            this.tabPageCompanies.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView_Companies
+            // 
+            this.dataGridView_Companies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView_Companies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView_Companies.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView_Companies.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView_Companies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Companies.GridColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridView_Companies.Location = new System.Drawing.Point(156, 3);
+            this.dataGridView_Companies.Name = "dataGridView_Companies";
+            this.dataGridView_Companies.ReadOnly = true;
+            this.dataGridView_Companies.RowTemplate.Height = 25;
+            this.dataGridView_Companies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Companies.Size = new System.Drawing.Size(953, 259);
+            this.dataGridView_Companies.TabIndex = 4;
+            // 
+            // DeleteCompany_button
+            // 
+            this.DeleteCompany_button.Location = new System.Drawing.Point(3, 171);
+            this.DeleteCompany_button.Name = "DeleteCompany_button";
+            this.DeleteCompany_button.Size = new System.Drawing.Size(147, 50);
+            this.DeleteCompany_button.TabIndex = 3;
+            this.DeleteCompany_button.Text = "Obriši Firmu";
+            this.DeleteCompany_button.UseVisualStyleBackColor = true;
+            // 
+            // AddNewCompany_button
+            // 
+            this.AddNewCompany_button.Location = new System.Drawing.Point(3, 115);
+            this.AddNewCompany_button.Name = "AddNewCompany_button";
+            this.AddNewCompany_button.Size = new System.Drawing.Size(147, 50);
+            this.AddNewCompany_button.TabIndex = 2;
+            this.AddNewCompany_button.Text = "Dodaj Novu Firmu";
+            this.AddNewCompany_button.UseVisualStyleBackColor = true;
+            // 
+            // EditCompany_button
+            // 
+            this.EditCompany_button.Location = new System.Drawing.Point(3, 59);
+            this.EditCompany_button.Name = "EditCompany_button";
+            this.EditCompany_button.Size = new System.Drawing.Size(147, 50);
+            this.EditCompany_button.TabIndex = 1;
+            this.EditCompany_button.Text = "Izmeni Firmu";
+            this.EditCompany_button.UseVisualStyleBackColor = true;
+            // 
+            // LoadCompanies_button
+            // 
+            this.LoadCompanies_button.Location = new System.Drawing.Point(3, 3);
+            this.LoadCompanies_button.Name = "LoadCompanies_button";
+            this.LoadCompanies_button.Size = new System.Drawing.Size(147, 50);
+            this.LoadCompanies_button.TabIndex = 0;
+            this.LoadCompanies_button.Text = "Učitaj Firme\r\n";
+            this.LoadCompanies_button.UseVisualStyleBackColor = true;
+            this.LoadCompanies_button.Click += new System.EventHandler(this.LoadCompanies_button_Click);
+            // 
             // TruckSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -341,6 +419,8 @@ namespace TruckSystem
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Vehicles)).EndInit();
             this.tabPageInvoices.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Invoices)).EndInit();
+            this.tabPageCompanies.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Companies)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -371,6 +451,12 @@ namespace TruckSystem
         private System.Windows.Forms.Button DeleteInvoice_button;
         private System.Windows.Forms.Button DeleteVehicle_button;
         private System.Windows.Forms.Button DeleteDriver_button;
+        private System.Windows.Forms.TabPage tabPageCompanies;
+        private System.Windows.Forms.Button DeleteCompany_button;
+        private System.Windows.Forms.Button AddNewCompany_button;
+        private System.Windows.Forms.Button EditCompany_button;
+        private System.Windows.Forms.Button LoadCompanies_button;
+        private System.Windows.Forms.DataGridView dataGridView_Companies;
     }
 }
 
