@@ -41,10 +41,14 @@ namespace TruckSystem
             this.LoadVehicles_button = new System.Windows.Forms.Button();
             this.dataGridView_Vehicles = new System.Windows.Forms.DataGridView();
             this.tabPageInvoices = new System.Windows.Forms.TabPage();
+            this.DeleteInvoice_button = new System.Windows.Forms.Button();
             this.AddNewInvoice_button = new System.Windows.Forms.Button();
             this.EditInvoice_button = new System.Windows.Forms.Button();
             this.LoadInvoices_button = new System.Windows.Forms.Button();
             this.dataGridView_Invoices = new System.Windows.Forms.DataGridView();
+            this.tabPageStatistics = new System.Windows.Forms.TabPage();
+            this.tabPageExpenses = new System.Windows.Forms.TabPage();
+            this.tabPageReminder = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPageDrivers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Drivers)).BeginInit();
@@ -62,11 +66,14 @@ namespace TruckSystem
             this.tabControl1.Controls.Add(this.tabPageDrivers);
             this.tabControl1.Controls.Add(this.tabPageVehicles);
             this.tabControl1.Controls.Add(this.tabPageInvoices);
+            this.tabControl1.Controls.Add(this.tabPageStatistics);
+            this.tabControl1.Controls.Add(this.tabPageExpenses);
+            this.tabControl1.Controls.Add(this.tabPageReminder);
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "dataGridView_Invoices";
+            this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1120, 536);
+            this.tabControl1.Size = new System.Drawing.Size(1120, 730);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 0;
             // 
@@ -79,7 +86,7 @@ namespace TruckSystem
             this.tabPageDrivers.Location = new System.Drawing.Point(4, 24);
             this.tabPageDrivers.Name = "tabPageDrivers";
             this.tabPageDrivers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDrivers.Size = new System.Drawing.Size(1112, 508);
+            this.tabPageDrivers.Size = new System.Drawing.Size(1112, 702);
             this.tabPageDrivers.TabIndex = 0;
             this.tabPageDrivers.Text = "Vozači";
             this.tabPageDrivers.UseVisualStyleBackColor = true;
@@ -140,7 +147,7 @@ namespace TruckSystem
             this.tabPageVehicles.Location = new System.Drawing.Point(4, 24);
             this.tabPageVehicles.Name = "tabPageVehicles";
             this.tabPageVehicles.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVehicles.Size = new System.Drawing.Size(1112, 508);
+            this.tabPageVehicles.Size = new System.Drawing.Size(1112, 702);
             this.tabPageVehicles.TabIndex = 1;
             this.tabPageVehicles.Text = "Vozila";
             this.tabPageVehicles.UseVisualStyleBackColor = true;
@@ -194,6 +201,7 @@ namespace TruckSystem
             // 
             // tabPageInvoices
             // 
+            this.tabPageInvoices.Controls.Add(this.DeleteInvoice_button);
             this.tabPageInvoices.Controls.Add(this.AddNewInvoice_button);
             this.tabPageInvoices.Controls.Add(this.EditInvoice_button);
             this.tabPageInvoices.Controls.Add(this.LoadInvoices_button);
@@ -201,16 +209,26 @@ namespace TruckSystem
             this.tabPageInvoices.Location = new System.Drawing.Point(4, 24);
             this.tabPageInvoices.Name = "tabPageInvoices";
             this.tabPageInvoices.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageInvoices.Size = new System.Drawing.Size(1112, 508);
+            this.tabPageInvoices.Size = new System.Drawing.Size(1112, 702);
             this.tabPageInvoices.TabIndex = 2;
             this.tabPageInvoices.Text = "Fakture";
             this.tabPageInvoices.UseVisualStyleBackColor = true;
             // 
+            // DeleteInvoice_button
+            // 
+            this.DeleteInvoice_button.Location = new System.Drawing.Point(3, 212);
+            this.DeleteInvoice_button.Name = "DeleteInvoice_button";
+            this.DeleteInvoice_button.Size = new System.Drawing.Size(147, 50);
+            this.DeleteInvoice_button.TabIndex = 12;
+            this.DeleteInvoice_button.Text = "Obriši Fakturu";
+            this.DeleteInvoice_button.UseVisualStyleBackColor = true;
+            this.DeleteInvoice_button.Click += new System.EventHandler(this.DeleteInvoice_button_Click);
+            // 
             // AddNewInvoice_button
             // 
-            this.AddNewInvoice_button.Location = new System.Drawing.Point(3, 196);
+            this.AddNewInvoice_button.Location = new System.Drawing.Point(3, 141);
             this.AddNewInvoice_button.Name = "AddNewInvoice_button";
-            this.AddNewInvoice_button.Size = new System.Drawing.Size(147, 66);
+            this.AddNewInvoice_button.Size = new System.Drawing.Size(147, 50);
             this.AddNewInvoice_button.TabIndex = 11;
             this.AddNewInvoice_button.Text = "Dodaj Novu Fakturu";
             this.AddNewInvoice_button.UseVisualStyleBackColor = true;
@@ -218,9 +236,9 @@ namespace TruckSystem
             // 
             // EditInvoice_button
             // 
-            this.EditInvoice_button.Location = new System.Drawing.Point(3, 112);
+            this.EditInvoice_button.Location = new System.Drawing.Point(3, 72);
             this.EditInvoice_button.Name = "EditInvoice_button";
-            this.EditInvoice_button.Size = new System.Drawing.Size(147, 66);
+            this.EditInvoice_button.Size = new System.Drawing.Size(147, 50);
             this.EditInvoice_button.TabIndex = 10;
             this.EditInvoice_button.Text = "Izmeni Fakturu";
             this.EditInvoice_button.UseVisualStyleBackColor = true;
@@ -228,15 +246,15 @@ namespace TruckSystem
             // 
             // LoadInvoices_button
             // 
-            this.LoadInvoices_button.Location = new System.Drawing.Point(3, 28);
+            this.LoadInvoices_button.Location = new System.Drawing.Point(3, 3);
             this.LoadInvoices_button.Name = "LoadInvoices_button";
-            this.LoadInvoices_button.Size = new System.Drawing.Size(147, 66);
+            this.LoadInvoices_button.Size = new System.Drawing.Size(147, 50);
             this.LoadInvoices_button.TabIndex = 9;
             this.LoadInvoices_button.Text = "Učitaj Fakture";
             this.LoadInvoices_button.UseVisualStyleBackColor = true;
             this.LoadInvoices_button.Click += new System.EventHandler(this.LoadInvoices_button_Click);
             // 
-            // dataGridView1
+            // dataGridView_Invoices
             // 
             this.dataGridView_Invoices.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -250,14 +268,44 @@ namespace TruckSystem
             this.dataGridView_Invoices.ReadOnly = true;
             this.dataGridView_Invoices.RowTemplate.Height = 25;
             this.dataGridView_Invoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Invoices.Size = new System.Drawing.Size(953, 259);
+            this.dataGridView_Invoices.Size = new System.Drawing.Size(953, 696);
             this.dataGridView_Invoices.TabIndex = 8;
+            // 
+            // tabPageStatistics
+            // 
+            this.tabPageStatistics.Location = new System.Drawing.Point(4, 24);
+            this.tabPageStatistics.Name = "tabPageStatistics";
+            this.tabPageStatistics.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageStatistics.Size = new System.Drawing.Size(1112, 702);
+            this.tabPageStatistics.TabIndex = 3;
+            this.tabPageStatistics.Text = "Statistika";
+            this.tabPageStatistics.UseVisualStyleBackColor = true;
+            // 
+            // tabPageExpenses
+            // 
+            this.tabPageExpenses.Location = new System.Drawing.Point(4, 24);
+            this.tabPageExpenses.Name = "tabPageExpenses";
+            this.tabPageExpenses.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageExpenses.Size = new System.Drawing.Size(1112, 702);
+            this.tabPageExpenses.TabIndex = 4;
+            this.tabPageExpenses.Text = "Troškovnik";
+            this.tabPageExpenses.UseVisualStyleBackColor = true;
+            // 
+            // tabPageReminder
+            // 
+            this.tabPageReminder.Location = new System.Drawing.Point(4, 24);
+            this.tabPageReminder.Name = "tabPageReminder";
+            this.tabPageReminder.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageReminder.Size = new System.Drawing.Size(1112, 702);
+            this.tabPageReminder.TabIndex = 5;
+            this.tabPageReminder.Text = "Podsetnik";
+            this.tabPageReminder.UseVisualStyleBackColor = true;
             // 
             // TruckSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1145, 561);
+            this.ClientSize = new System.Drawing.Size(1145, 755);
             this.Controls.Add(this.tabControl1);
             this.Name = "TruckSystem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -292,7 +340,11 @@ namespace TruckSystem
         private System.Windows.Forms.Button LoadInvoices_button;
         private System.Windows.Forms.Button AddNewInvoice_button;
         private System.Windows.Forms.Button EditInvoice_button;
-        private System.Windows.Forms.TabControl tabControl1; 
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPageReminder;
+        private System.Windows.Forms.TabPage tabPageStatistics;
+        private System.Windows.Forms.TabPage tabPageExpenses;
+        private System.Windows.Forms.Button DeleteInvoice_button;
     }
 }
 

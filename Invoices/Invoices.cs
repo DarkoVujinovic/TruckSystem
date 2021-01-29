@@ -12,6 +12,9 @@ namespace TruckSystem
         public string OsnovnaCena { get; set; }
         public string PDV { get; set; }
         public string KonačnaCena { get; set; }
+        public string ImeVozača { get; set; }
+        public string NazivVozila { get; set; }
+        public string BrojFakture { get; set; }
         public string VoziloId { get; set; }
         public string DriverId { get; set; }
     }

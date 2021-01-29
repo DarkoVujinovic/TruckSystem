@@ -30,18 +30,20 @@ namespace TruckSystem
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox_EditInvoiceDriver = new System.Windows.Forms.ComboBox();
+            this.comboBox_EditInvoiceVehicle = new System.Windows.Forms.ComboBox();
+            this.textBox_EditInvoiceNumber = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker_EditInvoiceDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox_EditInvoiceCompanyName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox_EditInvoiceDriver = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox_EditInvoiceBaseValue = new System.Windows.Forms.TextBox();
-            this.textBox_EditInvoiceVehicle = new System.Windows.Forms.TextBox();
             this.textBox_EditInvoiceVAT = new System.Windows.Forms.TextBox();
             this.textBox_EditInvoiceFinalValue = new System.Windows.Forms.TextBox();
             this.EditInvoice_CancelButton = new System.Windows.Forms.Button();
@@ -51,18 +53,20 @@ namespace TruckSystem
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox_EditInvoiceDriver);
+            this.groupBox1.Controls.Add(this.comboBox_EditInvoiceVehicle);
+            this.groupBox1.Controls.Add(this.textBox_EditInvoiceNumber);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dateTimePicker_EditInvoiceDeliveryDate);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.textBox_EditInvoiceCompanyName);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox_EditInvoiceDriver);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.textBox_EditInvoiceBaseValue);
-            this.groupBox1.Controls.Add(this.textBox_EditInvoiceVehicle);
             this.groupBox1.Controls.Add(this.textBox_EditInvoiceVAT);
             this.groupBox1.Controls.Add(this.textBox_EditInvoiceFinalValue);
             this.groupBox1.Controls.Add(this.EditInvoice_CancelButton);
@@ -73,6 +77,38 @@ namespace TruckSystem
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Podaci o fakturi";
+            // 
+            // comboBox_EditInvoiceDriver
+            // 
+            this.comboBox_EditInvoiceDriver.FormattingEnabled = true;
+            this.comboBox_EditInvoiceDriver.Location = new System.Drawing.Point(146, 295);
+            this.comboBox_EditInvoiceDriver.Name = "comboBox_EditInvoiceDriver";
+            this.comboBox_EditInvoiceDriver.Size = new System.Drawing.Size(182, 23);
+            this.comboBox_EditInvoiceDriver.TabIndex = 50;
+            // 
+            // comboBox_EditInvoiceVehicle
+            // 
+            this.comboBox_EditInvoiceVehicle.FormattingEnabled = true;
+            this.comboBox_EditInvoiceVehicle.Location = new System.Drawing.Point(146, 252);
+            this.comboBox_EditInvoiceVehicle.Name = "comboBox_EditInvoiceVehicle";
+            this.comboBox_EditInvoiceVehicle.Size = new System.Drawing.Size(183, 23);
+            this.comboBox_EditInvoiceVehicle.TabIndex = 49;
+            // 
+            // textBox_EditInvoiceNumber
+            // 
+            this.textBox_EditInvoiceNumber.Location = new System.Drawing.Point(146, 337);
+            this.textBox_EditInvoiceNumber.Name = "textBox_EditInvoiceNumber";
+            this.textBox_EditInvoiceNumber.Size = new System.Drawing.Size(184, 23);
+            this.textBox_EditInvoiceNumber.TabIndex = 48;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(70, 340);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 15);
+            this.label2.TabIndex = 47;
+            this.label2.Text = "Broj fakture:";
             // 
             // dateTimePicker_EditInvoiceDeliveryDate
             // 
@@ -117,13 +153,6 @@ namespace TruckSystem
             this.label3.TabIndex = 22;
             this.label3.Text = "Osnovna cena:";
             // 
-            // textBox_EditInvoiceDriver
-            // 
-            this.textBox_EditInvoiceDriver.Location = new System.Drawing.Point(146, 295);
-            this.textBox_EditInvoiceDriver.Name = "textBox_EditInvoiceDriver";
-            this.textBox_EditInvoiceDriver.Size = new System.Drawing.Size(184, 23);
-            this.textBox_EditInvoiceDriver.TabIndex = 36;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -167,13 +196,6 @@ namespace TruckSystem
             this.textBox_EditInvoiceBaseValue.Size = new System.Drawing.Size(184, 23);
             this.textBox_EditInvoiceBaseValue.TabIndex = 28;
             // 
-            // textBox_EditInvoiceVehicle
-            // 
-            this.textBox_EditInvoiceVehicle.Location = new System.Drawing.Point(146, 252);
-            this.textBox_EditInvoiceVehicle.Name = "textBox_EditInvoiceVehicle";
-            this.textBox_EditInvoiceVehicle.Size = new System.Drawing.Size(184, 23);
-            this.textBox_EditInvoiceVehicle.TabIndex = 31;
-            // 
             // textBox_EditInvoiceVAT
             // 
             this.textBox_EditInvoiceVAT.Location = new System.Drawing.Point(146, 162);
@@ -190,7 +212,7 @@ namespace TruckSystem
             // 
             // EditInvoice_CancelButton
             // 
-            this.EditInvoice_CancelButton.Location = new System.Drawing.Point(255, 353);
+            this.EditInvoice_CancelButton.Location = new System.Drawing.Point(255, 372);
             this.EditInvoice_CancelButton.Name = "EditInvoice_CancelButton";
             this.EditInvoice_CancelButton.Size = new System.Drawing.Size(75, 23);
             this.EditInvoice_CancelButton.TabIndex = 1;
@@ -200,11 +222,11 @@ namespace TruckSystem
             // 
             // EditInvoice_ApplyButton
             // 
-            this.EditInvoice_ApplyButton.Location = new System.Drawing.Point(160, 353);
+            this.EditInvoice_ApplyButton.Location = new System.Drawing.Point(160, 372);
             this.EditInvoice_ApplyButton.Name = "EditInvoice_ApplyButton";
             this.EditInvoice_ApplyButton.Size = new System.Drawing.Size(75, 23);
             this.EditInvoice_ApplyButton.TabIndex = 0;
-            this.EditInvoice_ApplyButton.Text = "Dodaj";
+            this.EditInvoice_ApplyButton.Text = "Izmeni\r\n";
             this.EditInvoice_ApplyButton.UseVisualStyleBackColor = true;
             this.EditInvoice_ApplyButton.Click += new System.EventHandler(this.EditInvoice_ApplyButton_Click_1);
             // 
@@ -241,9 +263,11 @@ namespace TruckSystem
         private System.Windows.Forms.TextBox textBox_EditInvoiceBaseValue;
         private System.Windows.Forms.TextBox textBox_EditInvoiceVAT;
         private System.Windows.Forms.TextBox textBox_EditInvoiceFinalValue;
-        private System.Windows.Forms.TextBox textBox_EditInvoiceVehicle;
-        private System.Windows.Forms.TextBox textBox_EditInvoiceDriver;
         private System.Windows.Forms.Button EditInvoice_ApplyButton;
         private System.Windows.Forms.Button EditInvoice_CancelButton;
+        private System.Windows.Forms.TextBox textBox_EditInvoiceNumber;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox_EditInvoiceVehicle;
+        private System.Windows.Forms.ComboBox comboBox_EditInvoiceDriver;
     }
 }
