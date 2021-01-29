@@ -31,11 +31,13 @@ namespace TruckSystem
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDrivers = new System.Windows.Forms.TabPage();
+            this.DeleteDriver_button = new System.Windows.Forms.Button();
             this.AddDriver_button = new System.Windows.Forms.Button();
             this.UpdateDriver_button = new System.Windows.Forms.Button();
             this.LoadDrivers_button = new System.Windows.Forms.Button();
             this.dataGridView_Drivers = new System.Windows.Forms.DataGridView();
             this.tabPageVehicles = new System.Windows.Forms.TabPage();
+            this.DeleteVehicle_button = new System.Windows.Forms.Button();
             this.AddNewVehicle_button = new System.Windows.Forms.Button();
             this.EditVehicle_button = new System.Windows.Forms.Button();
             this.LoadVehicles_button = new System.Windows.Forms.Button();
@@ -79,6 +81,7 @@ namespace TruckSystem
             // 
             // tabPageDrivers
             // 
+            this.tabPageDrivers.Controls.Add(this.DeleteDriver_button);
             this.tabPageDrivers.Controls.Add(this.AddDriver_button);
             this.tabPageDrivers.Controls.Add(this.UpdateDriver_button);
             this.tabPageDrivers.Controls.Add(this.LoadDrivers_button);
@@ -91,11 +94,21 @@ namespace TruckSystem
             this.tabPageDrivers.Text = "Vozači";
             this.tabPageDrivers.UseVisualStyleBackColor = true;
             // 
+            // DeleteDriver_button
+            // 
+            this.DeleteDriver_button.Location = new System.Drawing.Point(3, 171);
+            this.DeleteDriver_button.Name = "DeleteDriver_button";
+            this.DeleteDriver_button.Size = new System.Drawing.Size(147, 50);
+            this.DeleteDriver_button.TabIndex = 4;
+            this.DeleteDriver_button.Text = "Obriši Vozača";
+            this.DeleteDriver_button.UseVisualStyleBackColor = true;
+            this.DeleteDriver_button.Click += new System.EventHandler(this.DeleteDriver_button_Click);
+            // 
             // AddDriver_button
             // 
-            this.AddDriver_button.Location = new System.Drawing.Point(3, 196);
+            this.AddDriver_button.Location = new System.Drawing.Point(3, 115);
             this.AddDriver_button.Name = "AddDriver_button";
-            this.AddDriver_button.Size = new System.Drawing.Size(147, 66);
+            this.AddDriver_button.Size = new System.Drawing.Size(147, 50);
             this.AddDriver_button.TabIndex = 3;
             this.AddDriver_button.Text = "Dodaj Vozača";
             this.AddDriver_button.UseVisualStyleBackColor = true;
@@ -103,9 +116,9 @@ namespace TruckSystem
             // 
             // UpdateDriver_button
             // 
-            this.UpdateDriver_button.Location = new System.Drawing.Point(3, 112);
+            this.UpdateDriver_button.Location = new System.Drawing.Point(3, 59);
             this.UpdateDriver_button.Name = "UpdateDriver_button";
-            this.UpdateDriver_button.Size = new System.Drawing.Size(147, 66);
+            this.UpdateDriver_button.Size = new System.Drawing.Size(147, 50);
             this.UpdateDriver_button.TabIndex = 2;
             this.UpdateDriver_button.Text = "Izmeni Vozača";
             this.UpdateDriver_button.UseVisualStyleBackColor = true;
@@ -113,9 +126,9 @@ namespace TruckSystem
             // 
             // LoadDrivers_button
             // 
-            this.LoadDrivers_button.Location = new System.Drawing.Point(3, 28);
+            this.LoadDrivers_button.Location = new System.Drawing.Point(3, 3);
             this.LoadDrivers_button.Name = "LoadDrivers_button";
-            this.LoadDrivers_button.Size = new System.Drawing.Size(147, 66);
+            this.LoadDrivers_button.Size = new System.Drawing.Size(147, 50);
             this.LoadDrivers_button.TabIndex = 1;
             this.LoadDrivers_button.Text = "Učitaj Vozače";
             this.LoadDrivers_button.UseVisualStyleBackColor = true;
@@ -140,6 +153,7 @@ namespace TruckSystem
             // 
             // tabPageVehicles
             // 
+            this.tabPageVehicles.Controls.Add(this.DeleteVehicle_button);
             this.tabPageVehicles.Controls.Add(this.AddNewVehicle_button);
             this.tabPageVehicles.Controls.Add(this.EditVehicle_button);
             this.tabPageVehicles.Controls.Add(this.LoadVehicles_button);
@@ -152,11 +166,21 @@ namespace TruckSystem
             this.tabPageVehicles.Text = "Vozila";
             this.tabPageVehicles.UseVisualStyleBackColor = true;
             // 
+            // DeleteVehicle_button
+            // 
+            this.DeleteVehicle_button.Location = new System.Drawing.Point(3, 171);
+            this.DeleteVehicle_button.Name = "DeleteVehicle_button";
+            this.DeleteVehicle_button.Size = new System.Drawing.Size(147, 50);
+            this.DeleteVehicle_button.TabIndex = 8;
+            this.DeleteVehicle_button.Text = "Obriši Vozilo";
+            this.DeleteVehicle_button.UseVisualStyleBackColor = true;
+            this.DeleteVehicle_button.Click += new System.EventHandler(this.DeleteVehicle_button_Click);
+            // 
             // AddNewVehicle_button
             // 
-            this.AddNewVehicle_button.Location = new System.Drawing.Point(3, 196);
+            this.AddNewVehicle_button.Location = new System.Drawing.Point(3, 115);
             this.AddNewVehicle_button.Name = "AddNewVehicle_button";
-            this.AddNewVehicle_button.Size = new System.Drawing.Size(147, 66);
+            this.AddNewVehicle_button.Size = new System.Drawing.Size(147, 50);
             this.AddNewVehicle_button.TabIndex = 7;
             this.AddNewVehicle_button.Text = "Dodaj Novo Vozilo";
             this.AddNewVehicle_button.UseVisualStyleBackColor = true;
@@ -164,9 +188,9 @@ namespace TruckSystem
             // 
             // EditVehicle_button
             // 
-            this.EditVehicle_button.Location = new System.Drawing.Point(3, 112);
+            this.EditVehicle_button.Location = new System.Drawing.Point(3, 59);
             this.EditVehicle_button.Name = "EditVehicle_button";
-            this.EditVehicle_button.Size = new System.Drawing.Size(147, 66);
+            this.EditVehicle_button.Size = new System.Drawing.Size(147, 50);
             this.EditVehicle_button.TabIndex = 6;
             this.EditVehicle_button.Text = "Izmeni Vozilo";
             this.EditVehicle_button.UseVisualStyleBackColor = true;
@@ -174,9 +198,9 @@ namespace TruckSystem
             // 
             // LoadVehicles_button
             // 
-            this.LoadVehicles_button.Location = new System.Drawing.Point(3, 28);
+            this.LoadVehicles_button.Location = new System.Drawing.Point(3, 3);
             this.LoadVehicles_button.Name = "LoadVehicles_button";
-            this.LoadVehicles_button.Size = new System.Drawing.Size(147, 66);
+            this.LoadVehicles_button.Size = new System.Drawing.Size(147, 50);
             this.LoadVehicles_button.TabIndex = 5;
             this.LoadVehicles_button.Text = "Učitaj Vozila";
             this.LoadVehicles_button.UseVisualStyleBackColor = true;
@@ -216,7 +240,7 @@ namespace TruckSystem
             // 
             // DeleteInvoice_button
             // 
-            this.DeleteInvoice_button.Location = new System.Drawing.Point(3, 212);
+            this.DeleteInvoice_button.Location = new System.Drawing.Point(3, 171);
             this.DeleteInvoice_button.Name = "DeleteInvoice_button";
             this.DeleteInvoice_button.Size = new System.Drawing.Size(147, 50);
             this.DeleteInvoice_button.TabIndex = 12;
@@ -226,7 +250,7 @@ namespace TruckSystem
             // 
             // AddNewInvoice_button
             // 
-            this.AddNewInvoice_button.Location = new System.Drawing.Point(3, 141);
+            this.AddNewInvoice_button.Location = new System.Drawing.Point(3, 115);
             this.AddNewInvoice_button.Name = "AddNewInvoice_button";
             this.AddNewInvoice_button.Size = new System.Drawing.Size(147, 50);
             this.AddNewInvoice_button.TabIndex = 11;
@@ -236,7 +260,7 @@ namespace TruckSystem
             // 
             // EditInvoice_button
             // 
-            this.EditInvoice_button.Location = new System.Drawing.Point(3, 72);
+            this.EditInvoice_button.Location = new System.Drawing.Point(3, 59);
             this.EditInvoice_button.Name = "EditInvoice_button";
             this.EditInvoice_button.Size = new System.Drawing.Size(147, 50);
             this.EditInvoice_button.TabIndex = 10;
@@ -345,6 +369,8 @@ namespace TruckSystem
         private System.Windows.Forms.TabPage tabPageStatistics;
         private System.Windows.Forms.TabPage tabPageExpenses;
         private System.Windows.Forms.Button DeleteInvoice_button;
+        private System.Windows.Forms.Button DeleteVehicle_button;
+        private System.Windows.Forms.Button DeleteDriver_button;
     }
 }
 

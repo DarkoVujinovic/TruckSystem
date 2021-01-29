@@ -116,9 +116,18 @@ namespace TruckSystem
             Drivers = GetDrivers();
             dataGridView_Drivers.DataSource = Drivers;
 
-            // select last selected column in dataGridView1
-            dataGridView_Drivers.CurrentCell = dataGridView_Drivers.Rows[lastSelectedIndexDrivers].Cells[lastSelectedIndexDrivers];
-            dataGridView_Drivers.Rows[lastSelectedIndexDrivers].Selected = true;
+            if (lastSelectedIndexDrivers < 0)
+            {
+                lastSelectedIndexDrivers = 0;
+                // select last selected column in dataGridView1
+                dataGridView_Drivers.CurrentCell = dataGridView_Drivers.Rows[lastSelectedIndexDrivers].Cells[lastSelectedIndexDrivers];
+                dataGridView_Drivers.Rows[lastSelectedIndexDrivers].Selected = true;
+            }
+            else
+            {
+                dataGridView_Drivers.CurrentCell = dataGridView_Drivers.Rows[lastSelectedIndexDrivers].Cells[lastSelectedIndexDrivers];
+                dataGridView_Drivers.Rows[lastSelectedIndexDrivers].Selected = true;
+            }
         }
 
         public void AddDriver(Drivers driver)
@@ -261,6 +270,64 @@ namespace TruckSystem
             addDriver.ShowDialog();
         }
 
+        private void DeleteDriver_button_Click(object sender, EventArgs e)
+        {
+            // get row index 
+            int Index = 0;
+            try
+            {
+                Index = dataGridView_Drivers.CurrentCell.RowIndex;
+                lastSelectedIndexDrivers = Index;
+            }
+            catch
+            {
+                log.Debug("Vehicles not loaded correctly, please reload invoices.");
+                MessageBox.Show("Molimo prvo učitajte fakture na listu pritiskom na dugme 'Učitaj Fakture'. ", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Drivers drivers = new Drivers();
+            drivers = this.Drivers[Index];
+
+            DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da želite da obrišete vozača " + drivers.Ime.ToString() + " " + drivers.Prezime.ToString() + " - Dozvola broj: " + drivers.BrojVDozvole.ToString() + "?", "Upozorenje!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                lastSelectedIndexDrivers = lastSelectedIndexDrivers - 1; // lowered by 1, since last index will be deleted soon, we don't want errors
+                DeleteDriver(drivers);
+            }
+        }
+
+        private void DeleteDriver(Drivers drivers)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText = "DELETE FROM Drivers where driver_id = @driver_id ";
+            command.Parameters.AddWithValue("@driver_id", drivers.DriverId);
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                log.Debug("TruckSystem nije uspeo da obriše Vozača iz baze podataka. Molimo kontaktirajte poršku. ");
+                MessageBox.Show("TruckSystem nije uspeo da obriše Vozača iz baze podataka. Molimo kontaktirajte podršku. " + ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadDrivers();
+
+        }
+
         //-------------------------DRIVERS SECTION END-------------------------------//
 
         //-------------------------VEHICLES SECTION BEGIN-------------------------------//
@@ -349,9 +416,18 @@ namespace TruckSystem
             Vehicles = GetVehicles();
             dataGridView_Vehicles.DataSource = Vehicles;
 
-            // select last selected column in dataGridView1
-            dataGridView_Vehicles.CurrentCell = dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Cells[lastSelectedIndexVehicles];
-            dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Selected = true;
+            if (lastSelectedIndexVehicles < 0)
+            {
+                lastSelectedIndexVehicles = 0;
+                // select last selected column in dataGridView1
+                dataGridView_Vehicles.CurrentCell = dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Cells[lastSelectedIndexVehicles];
+                dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Selected = true;
+            }
+            else
+            {
+                dataGridView_Vehicles.CurrentCell = dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Cells[lastSelectedIndexVehicles];
+                dataGridView_Vehicles.Rows[lastSelectedIndexVehicles].Selected = true;
+            }
         }
 
         private void LoadVehicles_button_Click(object sender, EventArgs e)
@@ -491,6 +567,65 @@ namespace TruckSystem
             //refresh data
             LoadVehicles();
         }
+
+        private void DeleteVehicle_button_Click(object sender, EventArgs e)
+        {
+            // get row index 
+            int Index = 0;
+            try
+            {
+                Index = dataGridView_Vehicles.CurrentCell.RowIndex;
+                lastSelectedIndexVehicles = Index;
+            }
+            catch
+            {
+                log.Debug("Vehicles not loaded correctly, please reload invoices.");
+                MessageBox.Show("Molimo prvo učitajte fakture na listu pritiskom na dugme 'Učitaj Fakture'. ", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Vehicles vehicles = new Vehicles();
+            vehicles = this.Vehicles[Index];
+
+            DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da želite da obrišete vozilo " + vehicles.Proizvođač.ToString() + " " + vehicles.TipVozila.ToString() + " - Registarski broj: " + vehicles.RegistarskiBroj.ToString() +  "?", "Upozorenje!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                lastSelectedIndexVehicles = lastSelectedIndexVehicles - 1; // lowered by 1, since last index will be deleted soon, we don't want errors
+                DeleteVehicle(vehicles);
+            }
+        }
+
+        private void DeleteVehicle(Vehicles vehicle)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText = "DELETE FROM Trucks where truck_id = @truck_id ";
+            command.Parameters.AddWithValue("@truck_id", vehicle.VoziloId);
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                log.Debug("TruckSystem nije uspeo da obriše Vozilo iz baze podataka. Molimo kontaktirajte poršku. ");
+                MessageBox.Show("TruckSystem nije uspeo da obriše Vozilo iz baze podataka. Molimo kontaktirajte podršku. " + ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadVehicles();
+
+        }
+
         //-------------------------VEHICLES SECTION END-------------------------------//
 
         //-------------------------INVOICES SECTION BEGIN-------------------------------//
@@ -786,7 +921,7 @@ namespace TruckSystem
             //refresh data
             LoadInvoices();
         }
-        
+
         //-------------------------INVOICES SECTION END-------------------------------//
     }
 }

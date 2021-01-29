@@ -213,6 +213,9 @@ namespace TruckSystem
                             case 2:
                                 vehicles.TipVozila = dataReader[i].ToString();
                                 break;
+                            case 4:
+                                vehicles.RegistarskiBroj = dataReader[i].ToString();
+                                break;
                         }
                     }
                 }
@@ -239,8 +242,8 @@ namespace TruckSystem
 
             foreach (Vehicles item in VehiclesAndIDs)
             {
-                this.comboBox_EditInvoiceVehicle.Items.Add(item.Proizvođač.ToString() + " " + item.TipVozila.ToString());
-                VehiclesAndIdsMap.Add(item.Proizvođač.ToString() + " " + item.TipVozila.ToString(), item.VoziloId.ToString());
+                this.comboBox_EditInvoiceVehicle.Items.Add(item.Proizvođač.ToString() + " " + item.TipVozila.ToString() + " - " + item.RegistarskiBroj.ToString());
+                VehiclesAndIdsMap.Add(item.Proizvođač.ToString() + " " + item.TipVozila.ToString() + " - " + item.RegistarskiBroj.ToString(), item.VoziloId.ToString());
             }
             //this.comboBox_EditInvoiceVehicle.Text = "Odaberite vozilo"; // this.comboBox_InvoiceVehicle.Items[0].ToString();
         }
