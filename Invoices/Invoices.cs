@@ -9,12 +9,16 @@ namespace TruckSystem
         public int FakturaId { get; set; }
         public string NazivFirme { get; set; }
         public DateTime DatumIsporuke { get; set; }
+        public string Kilometraža { get; set; }
+        public string BrojIstovara { get; set; }
         public string OsnovnaCena { get; set; }
         public string PDV { get; set; }
         public string KonačnaCena { get; set; }
         public string ImeVozača { get; set; }
         public string NazivVozila { get; set; }
         public string BrojFakture { get; set; }
+        public string Plaćeno { get; set; }
+        public string VrstaPlaćanja { get; set; }
         public string VoziloId { get; set; }
         public string DriverId { get; set; }
         public string FirmaId { get; set; }

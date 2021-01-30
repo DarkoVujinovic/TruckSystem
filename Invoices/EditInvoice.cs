@@ -48,12 +48,18 @@ namespace TruckSystem
             this.textBox_EditInvoiceVAT.Text = invoice.PDV;
             this.textBox_EditInvoiceFinalValue.Text = invoice.KonačnaCena;
             this.textBox_EditInvoiceNumber.Text = invoice.BrojFakture;
+            this.textBox_EditInvoiceMileage.Text = invoice.Kilometraža;
+            this.textBox_EditInvoiceUnloadingNumber.Text = invoice.BrojIstovara;
 
             // insert into ComboBox and fetch from Invoice class
-            InsertDriversVehiclesAndCompaniesToComboBox();
+            InsertValuesIntoComboBoxes();
+
             this.comboBox_EditInvoiceVehicle.Text = invoice.NazivVozila;
             this.comboBox_EditInvoiceDriver.Text = invoice.ImeVozača;
             this.comboBox_EditInvoiceCompanyName.Text = invoice.NazivFirme;
+            this.comboBox_EditInvoiceIsPayed.Text = invoice.Plaćeno;
+            this.comboBox_EditInvoicePaymentType.Text = invoice.VrstaPlaćanja;
+
 
 
             sVoziloId = invoice.VoziloId;
@@ -73,7 +79,11 @@ namespace TruckSystem
                 invoice.FirmaId == OriginalCopy.FirmaId &&
                 invoice.BrojFakture == OriginalCopy.BrojFakture &&
                 invoice.NazivVozila == OriginalCopy.NazivVozila &&
-                invoice.ImeVozača == OriginalCopy.ImeVozača
+                invoice.ImeVozača == OriginalCopy.ImeVozača &&
+                invoice.Kilometraža == OriginalCopy.Kilometraža &&
+                invoice.BrojIstovara == OriginalCopy.BrojIstovara &&
+                invoice.Plaćeno == OriginalCopy.Plaćeno &&
+                invoice.VrstaPlaćanja == OriginalCopy.VrstaPlaćanja
                 )
             {
                 return true;
@@ -91,12 +101,16 @@ namespace TruckSystem
 
             invoice.NazivFirme = this.comboBox_EditInvoiceCompanyName.Text;
             invoice.DatumIsporuke = this.dateTimePicker_EditInvoiceDeliveryDate.Value.Date;
+            invoice.Kilometraža = this.textBox_EditInvoiceMileage.Text;
+            invoice.BrojIstovara = this.textBox_EditInvoiceUnloadingNumber.Text;
             invoice.OsnovnaCena = this.textBox_EditInvoiceBaseValue.Text;
             invoice.PDV = this.textBox_EditInvoiceVAT.Text;
             invoice.KonačnaCena = this.textBox_EditInvoiceFinalValue.Text;
             invoice.BrojFakture = this.textBox_EditInvoiceNumber.Text;
             invoice.NazivVozila = this.comboBox_EditInvoiceVehicle.Text;
-            invoice.ImeVozača = this.comboBox_EditInvoiceDriver.Text;
+            invoice.Plaćeno = this.comboBox_EditInvoiceIsPayed.Text;
+            invoice.VrstaPlaćanja = this.comboBox_EditInvoicePaymentType.Text;
+            invoice.ImeVozača = this.comboBox_EditInvoiceDriver.Text; 
             invoice.VoziloId = VehiclesAndIdsMap.GetValueOrDefault(this.comboBox_EditInvoiceVehicle.Text.ToString());
             invoice.DriverId = DriversAndIdsMap.GetValueOrDefault(this.comboBox_EditInvoiceDriver.Text.ToString());
             invoice.FirmaId = CompaniesAndIdsMap.GetValueOrDefault(this.comboBox_EditInvoiceCompanyName.Text.ToString());
@@ -287,7 +301,7 @@ namespace TruckSystem
             return list;
         }
 
-        private void InsertDriversVehiclesAndCompaniesToComboBox()
+        private void InsertValuesIntoComboBoxes()
         {
             DriversAndIDs = LoadDriversFromDriversTable();
             VehiclesAndIDs = LoadVehiclesFromTrucksTable();
@@ -313,6 +327,15 @@ namespace TruckSystem
                 CompaniesAndIdsMap.Add(item.NazivFirme.ToString() + " - PIB:" + item.PIB.ToString(), item.FirmaId.ToString());
             }
             //this.comboBox_EditInvoiceCompanyName.Text = "Odaberite firmu"; // this.comboBox_EditInvoiceCompanyName.Items[0].ToString();
+
+            // add to IsPayed Combo
+            this.comboBox_EditInvoiceIsPayed.Items.Add("Ne");
+            this.comboBox_EditInvoiceIsPayed.Items.Add("Da");
+
+            // add to PaymentType Combo
+            this.comboBox_EditInvoicePaymentType.Items.Add("Keš");
+            this.comboBox_EditInvoicePaymentType.Items.Add("Račun");
+
         }
     }
 }

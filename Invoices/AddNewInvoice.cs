@@ -29,7 +29,7 @@ namespace TruckSystem
         public AddNewInvoice(TruckSystem truckSystem)
         {
             InitializeComponent();
-            InsertDriversVehiclesAndCompaniesToComboBox();
+            InsertValuesIntoComboBoxes();
 
             this._parent = truckSystem;
         }
@@ -38,19 +38,23 @@ namespace TruckSystem
         {
             Invoices invoice = new Invoices();
 
-            // we do not see VoziloId and DriverId in the NewInvoiceForm, but we need this for statistics
+            // we do not see VoziloId, DriverId and FirmaId in the NewInvoiceForm, but we need this for statistics
             invoice.VoziloId = VehiclesAndIdsMap.GetValueOrDefault(this.comboBox_InvoiceVehicle.Text.ToString());
             invoice.DriverId = DriversAndIdsMap.GetValueOrDefault(this.comboBox_InvoiceDriver.Text.ToString());
             invoice.FirmaId = CompaniesAndIdsMap.GetValueOrDefault(this.comboBox_InvoiceCompanyName.Text.ToString());
 
             invoice.NazivFirme = this.comboBox_InvoiceCompanyName.Text;
             invoice.DatumIsporuke = this.dateTimePicker_InvoiceDeliveryDate.Value.Date;
+            invoice.Kilometraža = this.textBox_InvoiceMileage.Text;
+            invoice.BrojIstovara = this.textBox_InvoiceUnloadingNumber.Text;
             invoice.OsnovnaCena = this.textBox_InvoiceBaseValue.Text;
             invoice.PDV = this.textBox_InvoiceVAT.Text;
             invoice.KonačnaCena = this.textBox_InvoiceFinalValue.Text;
             invoice.NazivVozila = this.comboBox_InvoiceVehicle.Text;
             invoice.ImeVozača = this.comboBox_InvoiceDriver.Text;
             invoice.BrojFakture = this.textBox_InvoiceNumber.Text;
+            invoice.Plaćeno = this.comboBox_InvoiceIsPayed.Text;
+            invoice.VrstaPlaćanja = this.comboBox_InvoicePaymentType.Text;
 
             //values from dialog changed, perform update operation
 
@@ -225,7 +229,7 @@ namespace TruckSystem
             return list;
         }
 
-        private void InsertDriversVehiclesAndCompaniesToComboBox()
+        private void InsertValuesIntoComboBoxes()
         {
             DriversAndIDs = LoadDriversFromDriversTable();
             VehiclesAndIDs = LoadVehiclesFromTrucksTable();
@@ -251,6 +255,14 @@ namespace TruckSystem
                 CompaniesAndIdsMap.Add(item.NazivFirme.ToString() + " - PIB:" + item.PIB.ToString(), item.FirmaId.ToString());
             }
             this.comboBox_InvoiceCompanyName.Text = "Odaberite firmu"; // this.comboBox_InvoiceCompanyName.Items[0].ToString();
+
+            // add to IsPayed Combo
+            this.comboBox_InvoiceIsPayed.Items.Add("Ne");
+            this.comboBox_InvoiceIsPayed.Items.Add("Da");
+
+            // add to PaymentType Combo
+            this.comboBox_InvoicePaymentType.Items.Add("Keš");
+            this.comboBox_InvoicePaymentType.Items.Add("Račun");
         }
     }
 }

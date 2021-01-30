@@ -74,13 +74,16 @@ namespace TruckSystem
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPageDrivers);
-            this.tabControl1.Controls.Add(this.tabPageVehicles);
-            this.tabControl1.Controls.Add(this.tabPageInvoices);
-            this.tabControl1.Controls.Add(this.tabPageStatistics);
-            this.tabControl1.Controls.Add(this.tabPageExpenses);
-            this.tabControl1.Controls.Add(this.tabPageReminder);
-            this.tabControl1.Controls.Add(this.tabPageCompanies);
+
+            // tab order
+            this.tabControl1.Controls.Add(this.tabPageDrivers);     //1
+            this.tabControl1.Controls.Add(this.tabPageVehicles);    //2
+            this.tabControl1.Controls.Add(this.tabPageInvoices);    //3
+            this.tabControl1.Controls.Add(this.tabPageCompanies);   //4
+            this.tabControl1.Controls.Add(this.tabPageStatistics);  //5
+            this.tabControl1.Controls.Add(this.tabPageExpenses);    //6
+            this.tabControl1.Controls.Add(this.tabPageReminder);    //7
+
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";

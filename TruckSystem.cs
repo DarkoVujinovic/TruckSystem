@@ -34,6 +34,31 @@ namespace TruckSystem
             InitializeComponent();
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            // receive message from NativeMethods class
+            if (m.Msg == NativeMethods.WM_SHOWME)
+            {
+                ShowMe();
+            }
+            base.WndProc(ref m);
+        }
+
+        // we want to show running window
+        private void ShowMe()
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                WindowState = FormWindowState.Normal;
+            }
+            // get our current "TopMost" value (ours will always be false though)
+            bool top = TopMost;
+            // make our form jump to the top of everything
+            TopMost = true;
+            // set it back to whatever it was
+            TopMost = top;
+        }
+
         //-------------------------DRIVERS SECTION BEGIN-------------------------------//
         private static List<Drivers> GetDrivers()
         {
@@ -672,30 +697,44 @@ namespace TruckSystem
                                 invoices.DatumIsporuke = (DateTime)dataReader[i];
                                 break;
                             case 3:
-                                invoices.OsnovnaCena = ((string)dataReader[i]).Trim();
+                                invoices.Kilometraža = ((string)dataReader[i]).Trim();
                                 break;
                             case 4:
-                                invoices.PDV = ((string)dataReader[i]).Trim();
+                                invoices.BrojIstovara = ((string)dataReader[i]).Trim();
                                 break;
                             case 5:
-                                invoices.KonačnaCena = ((string)dataReader[i]).Trim();
+                                invoices.OsnovnaCena = ((string)dataReader[i]).Trim();
                                 break;
                             case 6:
-                                invoices.NazivVozila = dataReader[i].ToString();
+                                invoices.PDV = ((string)dataReader[i]).Trim();
                                 break;
                             case 7:
-                                invoices.ImeVozača = dataReader[i].ToString();
+                                invoices.KonačnaCena = ((string)dataReader[i]).Trim();
                                 break;
                             case 8:
-                                invoices.BrojFakture = dataReader[i].ToString();
+                                invoices.NazivVozila = dataReader[i].ToString();
                                 break;
                             case 9:
-                                invoices.DriverId = dataReader[i].ToString();
+                                invoices.ImeVozača = dataReader[i].ToString();
                                 break;
                             case 10:
+                                invoices.BrojFakture = dataReader[i].ToString();
+                                break;
+                            case 11:
+                                invoices.Plaćeno = dataReader[i].ToString();
+                                break;
+                            case 12:
+                                invoices.VrstaPlaćanja = dataReader[i].ToString();
+                                break;
+                            case 13:
+                                invoices.DriverId = dataReader[i].ToString();
+                                break;
+                            case 14:
                                 invoices.VoziloId = dataReader[i].ToString();
                                 break;
-                            
+                            case 15:
+                                invoices.FirmaId = dataReader[i].ToString();
+                                break;
                         }
                     }
 
@@ -710,11 +749,11 @@ namespace TruckSystem
         }
         private void LoadInvoices()
         {
-            // load vehicles in dataGridView_Vehicles
+            // load invoices in dataGridView_Invoices
             Invoices = GetInvoices();
             dataGridView_Invoices.DataSource = Invoices;
 
-            // select last selected column in dataGridView1
+            // select last selected column in dataGridView_Invoices
             if (lastSelectedIndexInvoices < 0)
             {
                 lastSelectedIndexInvoices = 0;
@@ -735,17 +774,21 @@ namespace TruckSystem
 
             // query
             command.CommandText = " INSERT INTO Invoices " +
-                                    "(company_name, delivery_date, base_value, vat," +
-                                    " final_value, truck_name, driver_name, invoice_number, driver_id, truck_id, company_id)" +
+                                    "(company_name, delivery_date, mileage, unloading_number, base_value, vat," +
+                                    " final_value, truck_name, driver_name, invoice_number, is_payed, payment_type, driver_id, truck_id, company_id)" +
                                     " VALUES ( " +
                                     " @company_name, " +
                                     " @delivery_date, " +
+                                    " @mileage, " +
+                                    " @unloading_number, " +
                                     " @base_value, " +
                                     " @vat, " +
                                     " @final_value, " +
                                     " @truck_name, " +
                                     " @driver_name, " +
                                     " @invoice_number, " +
+                                    " @is_payed, " +
+                                    " @payment_type, " +
                                     " @driver_id, " +
                                     " @truck_id, " +
                                     " @company_id) ";
@@ -754,12 +797,16 @@ namespace TruckSystem
             command.Parameters.AddWithValue("@company_id", invoice.FirmaId);
             command.Parameters.AddWithValue("@truck_id", invoice.VoziloId);
             command.Parameters.AddWithValue("@driver_id", invoice.DriverId);
+            command.Parameters.AddWithValue("@payment_type", invoice.VrstaPlaćanja);
+            command.Parameters.AddWithValue("@is_payed", invoice.Plaćeno);
             command.Parameters.AddWithValue("@invoice_number", invoice.BrojFakture);
             command.Parameters.AddWithValue("@driver_name", invoice.ImeVozača);
             command.Parameters.AddWithValue("@truck_name", invoice.NazivVozila);
             command.Parameters.AddWithValue("@final_value", invoice.KonačnaCena);
             command.Parameters.AddWithValue("@vat", invoice.PDV);
             command.Parameters.AddWithValue("@base_value", invoice.OsnovnaCena);
+            command.Parameters.AddWithValue("@unloading_number", invoice.BrojIstovara);
+            command.Parameters.AddWithValue("@mileage", invoice.Kilometraža);
             command.Parameters.AddWithValue("@delivery_date", invoice.DatumIsporuke.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@company_name", invoice.NazivFirme);
             
@@ -793,12 +840,16 @@ namespace TruckSystem
                                     " company_id = @company_id, " +
                                     " truck_id = @truck_id, " +
                                     " driver_id =@driver_id, " +
+                                    " payment_type =@payment_type, " +
+                                    " is_payed =@is_payed, " +
                                     " invoice_number = @invoice_number, " +
                                     " driver_name = @driver_name, " +
                                     " truck_name = @truck_name, " +
                                     " final_value = @final_value, " +
                                     " vat = @vat, " +
                                     " base_value = @base_value, " +
+                                    " unloading_number = @unloading_number, " +
+                                    " mileage = @mileage, " +
                                     " delivery_date = @delivery_date, " +
                                     " company_name = @company_name " +
                                     " WHERE invoice_id = @invoice_id ";
@@ -807,12 +858,16 @@ namespace TruckSystem
             command.Parameters.AddWithValue("@company_id", invoice.FirmaId);
             command.Parameters.AddWithValue("@truck_id", invoice.VoziloId);
             command.Parameters.AddWithValue("@driver_id", invoice.DriverId);
+            command.Parameters.AddWithValue("@payment_type", invoice.VrstaPlaćanja);
+            command.Parameters.AddWithValue("@is_payed", invoice.Plaćeno);
             command.Parameters.AddWithValue("@invoice_number", invoice.BrojFakture);
             command.Parameters.AddWithValue("@driver_name", invoice.ImeVozača);
-            command.Parameters.AddWithValue("@truck_name", invoice.NazivVozila);            
+            command.Parameters.AddWithValue("@truck_name", invoice.NazivVozila);
             command.Parameters.AddWithValue("@final_value", invoice.KonačnaCena);
             command.Parameters.AddWithValue("@vat", invoice.PDV);
             command.Parameters.AddWithValue("@base_value", invoice.OsnovnaCena);
+            command.Parameters.AddWithValue("@unloading_number", invoice.BrojIstovara);
+            command.Parameters.AddWithValue("@mileage", invoice.Kilometraža);
             command.Parameters.AddWithValue("@delivery_date", invoice.DatumIsporuke.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@company_name", invoice.NazivFirme);
 
