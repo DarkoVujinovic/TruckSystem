@@ -36,7 +36,6 @@ namespace TruckSystem
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker_InvoiceDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox_InvoiceCompanyName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,18 +47,19 @@ namespace TruckSystem
             this.textBox_InvoiceFinalValue = new System.Windows.Forms.TextBox();
             this.AddInvoice_CancelButton = new System.Windows.Forms.Button();
             this.AddInvoice_ApplyButton = new System.Windows.Forms.Button();
+            this.comboBox_InvoiceCompanyName = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox_InvoiceCompanyName);
             this.groupBox1.Controls.Add(this.comboBox_InvoiceDriver);
             this.groupBox1.Controls.Add(this.comboBox_InvoiceVehicle);
             this.groupBox1.Controls.Add(this.textBox_InvoiceNumber);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dateTimePicker_InvoiceDeliveryDate);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.textBox_InvoiceCompanyName);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
@@ -127,13 +127,6 @@ namespace TruckSystem
             this.label8.Size = new System.Drawing.Size(94, 15);
             this.label8.TabIndex = 42;
             this.label8.Text = "Datum isporuke:";
-            // 
-            // textBox_InvoiceCompanyName
-            // 
-            this.textBox_InvoiceCompanyName.Location = new System.Drawing.Point(146, 33);
-            this.textBox_InvoiceCompanyName.Name = "textBox_InvoiceCompanyName";
-            this.textBox_InvoiceCompanyName.Size = new System.Drawing.Size(184, 23);
-            this.textBox_InvoiceCompanyName.TabIndex = 26;
             // 
             // label1
             // 
@@ -230,6 +223,14 @@ namespace TruckSystem
             this.AddInvoice_ApplyButton.UseVisualStyleBackColor = true;
             this.AddInvoice_ApplyButton.Click += new System.EventHandler(this.AddInvoice_ApplyButton_Click);
             // 
+            // comboBox_InvoiceCompanyName
+            // 
+            this.comboBox_InvoiceCompanyName.FormattingEnabled = true;
+            this.comboBox_InvoiceCompanyName.Location = new System.Drawing.Point(146, 33);
+            this.comboBox_InvoiceCompanyName.Name = "comboBox_InvoiceCompanyName";
+            this.comboBox_InvoiceCompanyName.Size = new System.Drawing.Size(184, 23);
+            this.comboBox_InvoiceCompanyName.TabIndex = 49;
+            // 
             // AddNewInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -254,7 +255,6 @@ namespace TruckSystem
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dateTimePicker_InvoiceDeliveryDate;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox_InvoiceCompanyName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -270,5 +270,6 @@ namespace TruckSystem
         private System.Windows.Forms.TextBox textBox_InvoiceNumber;
         private System.Windows.Forms.ComboBox comboBox_InvoiceVehicle;
         private System.Windows.Forms.ComboBox comboBox_InvoiceDriver;
+        private System.Windows.Forms.ComboBox comboBox_InvoiceCompanyName;
     }
 }

@@ -29,6 +29,7 @@ namespace TruckSystem
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TruckSystem));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDrivers = new System.Windows.Forms.TabPage();
             this.DeleteDriver_button = new System.Windows.Forms.Button();
@@ -374,6 +375,7 @@ namespace TruckSystem
             this.DeleteCompany_button.TabIndex = 3;
             this.DeleteCompany_button.Text = "Obriši Firmu";
             this.DeleteCompany_button.UseVisualStyleBackColor = true;
+            this.DeleteCompany_button.Click += new System.EventHandler(this.DeleteCompany_button_Click);
             // 
             // AddNewCompany_button
             // 
@@ -383,6 +385,7 @@ namespace TruckSystem
             this.AddNewCompany_button.TabIndex = 2;
             this.AddNewCompany_button.Text = "Dodaj Novu Firmu";
             this.AddNewCompany_button.UseVisualStyleBackColor = true;
+            this.AddNewCompany_button.Click += new System.EventHandler(this.AddNewCompany_button_Click);
             // 
             // EditCompany_button
             // 
@@ -392,6 +395,7 @@ namespace TruckSystem
             this.EditCompany_button.TabIndex = 1;
             this.EditCompany_button.Text = "Izmeni Firmu";
             this.EditCompany_button.UseVisualStyleBackColor = true;
+            this.EditCompany_button.Click += new System.EventHandler(this.EditCompany_button_Click);
             // 
             // LoadCompanies_button
             // 
@@ -409,6 +413,7 @@ namespace TruckSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1145, 755);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TruckSystem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TruckSystem";

@@ -29,48 +29,49 @@ namespace TruckSystem
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewCompany));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_InvoiceNumber = new System.Windows.Forms.TextBox();
+            this.textBox_CompanyTelephoneNo = new System.Windows.Forms.TextBox();
+            this.textBox_CompanyBankAcctNo = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox_Company_City_Headq = new System.Windows.Forms.TextBox();
+            this.textBox_CompanyEmail = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox_InvoiceCompanyName = new System.Windows.Forms.TextBox();
+            this.textBox_CompanyName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox_InvoiceBaseValue = new System.Windows.Forms.TextBox();
-            this.textBox_InvoiceVAT = new System.Windows.Forms.TextBox();
-            this.textBox_InvoiceFinalValue = new System.Windows.Forms.TextBox();
-            this.AddInvoice_CancelButton = new System.Windows.Forms.Button();
-            this.AddInvoice_ApplyButton = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox_CompanyAddress = new System.Windows.Forms.TextBox();
+            this.textBox_CompanyOwner = new System.Windows.Forms.TextBox();
+            this.textBox_CompanyTaxIdNum = new System.Windows.Forms.TextBox();
+            this.AddCompany_CancelButton = new System.Windows.Forms.Button();
+            this.AddCompany_ApplyButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.textBox_CompanyTelephoneNo);
+            this.groupBox1.Controls.Add(this.textBox_CompanyBankAcctNo);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.textBox_InvoiceNumber);
+            this.groupBox1.Controls.Add(this.textBox_Company_City_Headq);
+            this.groupBox1.Controls.Add(this.textBox_CompanyEmail);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox_InvoiceCompanyName);
+            this.groupBox1.Controls.Add(this.textBox_CompanyName);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.textBox_InvoiceBaseValue);
-            this.groupBox1.Controls.Add(this.textBox_InvoiceVAT);
-            this.groupBox1.Controls.Add(this.textBox_InvoiceFinalValue);
-            this.groupBox1.Controls.Add(this.AddInvoice_CancelButton);
-            this.groupBox1.Controls.Add(this.AddInvoice_ApplyButton);
+            this.groupBox1.Controls.Add(this.textBox_CompanyAddress);
+            this.groupBox1.Controls.Add(this.textBox_CompanyOwner);
+            this.groupBox1.Controls.Add(this.textBox_CompanyTaxIdNum);
+            this.groupBox1.Controls.Add(this.AddCompany_CancelButton);
+            this.groupBox1.Controls.Add(this.AddCompany_ApplyButton);
             this.groupBox1.Location = new System.Drawing.Point(18, 11);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(363, 401);
@@ -78,12 +79,42 @@ namespace TruckSystem
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Podaci o firmi";
             // 
-            // textBox_InvoiceNumber
+            // textBox_CompanyTelephoneNo
             // 
-            this.textBox_InvoiceNumber.Location = new System.Drawing.Point(146, 334);
-            this.textBox_InvoiceNumber.Name = "textBox_InvoiceNumber";
-            this.textBox_InvoiceNumber.Size = new System.Drawing.Size(184, 23);
-            this.textBox_InvoiceNumber.TabIndex = 46;
+            this.textBox_CompanyTelephoneNo.Location = new System.Drawing.Point(146, 291);
+            this.textBox_CompanyTelephoneNo.Name = "textBox_CompanyTelephoneNo";
+            this.textBox_CompanyTelephoneNo.Size = new System.Drawing.Size(184, 23);
+            this.textBox_CompanyTelephoneNo.TabIndex = 50;
+            // 
+            // textBox_CompanyBankAcctNo
+            // 
+            this.textBox_CompanyBankAcctNo.Location = new System.Drawing.Point(146, 248);
+            this.textBox_CompanyBankAcctNo.Name = "textBox_CompanyBankAcctNo";
+            this.textBox_CompanyBankAcctNo.Size = new System.Drawing.Size(184, 23);
+            this.textBox_CompanyBankAcctNo.TabIndex = 49;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(105, 122);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 15);
+            this.label8.TabIndex = 47;
+            this.label8.Text = "Grad:";
+            // 
+            // textBox_Company_City_Headq
+            // 
+            this.textBox_Company_City_Headq.Location = new System.Drawing.Point(146, 119);
+            this.textBox_Company_City_Headq.Name = "textBox_Company_City_Headq";
+            this.textBox_Company_City_Headq.Size = new System.Drawing.Size(184, 23);
+            this.textBox_Company_City_Headq.TabIndex = 48;
+            // 
+            // textBox_CompanyEmail
+            // 
+            this.textBox_CompanyEmail.Location = new System.Drawing.Point(146, 334);
+            this.textBox_CompanyEmail.Name = "textBox_CompanyEmail";
+            this.textBox_CompanyEmail.Size = new System.Drawing.Size(184, 23);
+            this.textBox_CompanyEmail.TabIndex = 46;
             // 
             // label2
             // 
@@ -94,12 +125,12 @@ namespace TruckSystem
             this.label2.TabIndex = 45;
             this.label2.Text = "eMail:";
             // 
-            // textBox_InvoiceCompanyName
+            // textBox_CompanyName
             // 
-            this.textBox_InvoiceCompanyName.Location = new System.Drawing.Point(146, 33);
-            this.textBox_InvoiceCompanyName.Name = "textBox_InvoiceCompanyName";
-            this.textBox_InvoiceCompanyName.Size = new System.Drawing.Size(184, 23);
-            this.textBox_InvoiceCompanyName.TabIndex = 26;
+            this.textBox_CompanyName.Location = new System.Drawing.Point(146, 33);
+            this.textBox_CompanyName.Name = "textBox_CompanyName";
+            this.textBox_CompanyName.Size = new System.Drawing.Size(184, 23);
+            this.textBox_CompanyName.TabIndex = 26;
             // 
             // label1
             // 
@@ -155,74 +186,46 @@ namespace TruckSystem
             this.label7.TabIndex = 32;
             this.label7.Text = "Kontakt Telefon:";
             // 
-            // textBox_InvoiceBaseValue
+            // textBox_CompanyAddress
             // 
-            this.textBox_InvoiceBaseValue.Location = new System.Drawing.Point(146, 76);
-            this.textBox_InvoiceBaseValue.Name = "textBox_InvoiceBaseValue";
-            this.textBox_InvoiceBaseValue.Size = new System.Drawing.Size(184, 23);
-            this.textBox_InvoiceBaseValue.TabIndex = 28;
+            this.textBox_CompanyAddress.Location = new System.Drawing.Point(146, 76);
+            this.textBox_CompanyAddress.Name = "textBox_CompanyAddress";
+            this.textBox_CompanyAddress.Size = new System.Drawing.Size(184, 23);
+            this.textBox_CompanyAddress.TabIndex = 28;
             // 
-            // textBox_InvoiceVAT
+            // textBox_CompanyOwner
             // 
-            this.textBox_InvoiceVAT.Location = new System.Drawing.Point(146, 162);
-            this.textBox_InvoiceVAT.Name = "textBox_InvoiceVAT";
-            this.textBox_InvoiceVAT.Size = new System.Drawing.Size(184, 23);
-            this.textBox_InvoiceVAT.TabIndex = 29;
+            this.textBox_CompanyOwner.Location = new System.Drawing.Point(146, 162);
+            this.textBox_CompanyOwner.Name = "textBox_CompanyOwner";
+            this.textBox_CompanyOwner.Size = new System.Drawing.Size(184, 23);
+            this.textBox_CompanyOwner.TabIndex = 29;
             // 
-            // textBox_InvoiceFinalValue
+            // textBox_CompanyTaxIdNum
             // 
-            this.textBox_InvoiceFinalValue.Location = new System.Drawing.Point(146, 205);
-            this.textBox_InvoiceFinalValue.Name = "textBox_InvoiceFinalValue";
-            this.textBox_InvoiceFinalValue.Size = new System.Drawing.Size(184, 23);
-            this.textBox_InvoiceFinalValue.TabIndex = 30;
+            this.textBox_CompanyTaxIdNum.Location = new System.Drawing.Point(146, 205);
+            this.textBox_CompanyTaxIdNum.Name = "textBox_CompanyTaxIdNum";
+            this.textBox_CompanyTaxIdNum.Size = new System.Drawing.Size(184, 23);
+            this.textBox_CompanyTaxIdNum.TabIndex = 30;
             // 
-            // AddInvoice_CancelButton
+            // AddCompany_CancelButton
             // 
-            this.AddInvoice_CancelButton.Location = new System.Drawing.Point(255, 372);
-            this.AddInvoice_CancelButton.Name = "AddInvoice_CancelButton";
-            this.AddInvoice_CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.AddInvoice_CancelButton.TabIndex = 1;
-            this.AddInvoice_CancelButton.Text = "Otkaži";
-            this.AddInvoice_CancelButton.UseVisualStyleBackColor = true;
+            this.AddCompany_CancelButton.Location = new System.Drawing.Point(255, 372);
+            this.AddCompany_CancelButton.Name = "AddCompany_CancelButton";
+            this.AddCompany_CancelButton.Size = new System.Drawing.Size(75, 23);
+            this.AddCompany_CancelButton.TabIndex = 1;
+            this.AddCompany_CancelButton.Text = "Otkaži";
+            this.AddCompany_CancelButton.UseVisualStyleBackColor = true;
+            this.AddCompany_CancelButton.Click += new System.EventHandler(this.AddCompany_CancelButton_Click);
             // 
-            // AddInvoice_ApplyButton
+            // AddCompany_ApplyButton
             // 
-            this.AddInvoice_ApplyButton.Location = new System.Drawing.Point(160, 372);
-            this.AddInvoice_ApplyButton.Name = "AddInvoice_ApplyButton";
-            this.AddInvoice_ApplyButton.Size = new System.Drawing.Size(75, 23);
-            this.AddInvoice_ApplyButton.TabIndex = 0;
-            this.AddInvoice_ApplyButton.Text = "Dodaj";
-            this.AddInvoice_ApplyButton.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(105, 122);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 15);
-            this.label8.TabIndex = 47;
-            this.label8.Text = "Grad:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(146, 119);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(184, 23);
-            this.textBox1.TabIndex = 48;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(146, 248);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(184, 23);
-            this.textBox2.TabIndex = 49;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(146, 291);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(184, 23);
-            this.textBox3.TabIndex = 50;
+            this.AddCompany_ApplyButton.Location = new System.Drawing.Point(160, 372);
+            this.AddCompany_ApplyButton.Name = "AddCompany_ApplyButton";
+            this.AddCompany_ApplyButton.Size = new System.Drawing.Size(75, 23);
+            this.AddCompany_ApplyButton.TabIndex = 0;
+            this.AddCompany_ApplyButton.Text = "Dodaj";
+            this.AddCompany_ApplyButton.UseVisualStyleBackColor = true;
+            this.AddCompany_ApplyButton.Click += new System.EventHandler(this.AddCompany_ApplyButton_Click);
             // 
             // AddNewCompany
             // 
@@ -230,6 +233,7 @@ namespace TruckSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 423);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddNewCompany";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -243,23 +247,23 @@ namespace TruckSystem
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox_InvoiceNumber;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_InvoiceCompanyName;
+        private System.Windows.Forms.TextBox textBox_CompanyName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox_InvoiceBaseValue;
-        private System.Windows.Forms.TextBox textBox_InvoiceVAT;
-        private System.Windows.Forms.TextBox textBox_InvoiceFinalValue;
-        private System.Windows.Forms.Button AddInvoice_CancelButton;
-        private System.Windows.Forms.Button AddInvoice_ApplyButton;
+        private System.Windows.Forms.Button AddCompany_ApplyButton;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox_CompanyAddress;
+        private System.Windows.Forms.TextBox textBox_Company_City_Headq;
+        private System.Windows.Forms.TextBox textBox_CompanyOwner;
+        private System.Windows.Forms.TextBox textBox_CompanyTaxIdNum;
+        private System.Windows.Forms.TextBox textBox_CompanyBankAcctNo;
+        private System.Windows.Forms.TextBox textBox_CompanyTelephoneNo;
+        private System.Windows.Forms.TextBox textBox_CompanyEmail;
+        private System.Windows.Forms.Button AddCompany_CancelButton;
     }
 }

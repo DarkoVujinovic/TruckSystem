@@ -17,5 +17,6 @@ namespace TruckSystem
         public string BrojFakture { get; set; }
         public string VoziloId { get; set; }
         public string DriverId { get; set; }
+        public string FirmaId { get; set; }
     }
 }

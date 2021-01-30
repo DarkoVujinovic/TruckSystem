@@ -16,9 +16,11 @@ namespace TruckSystem
         private Invoices OriginalCopy;
         public List<Drivers> DriversAndIDs { get; set; }
         public List<Vehicles> VehiclesAndIDs { get; set; }
+        public List<Companies> CompaniesAndIDs { get; set; }
 
         SortedDictionary<string, string> DriversAndIdsMap = new SortedDictionary<string, string>();
         SortedDictionary<string, string> VehiclesAndIdsMap = new SortedDictionary<string, string>();
+        SortedDictionary<string, string> CompaniesAndIdsMap = new SortedDictionary<string, string>();
 
         private static int invoiceId;
         private static string sVoziloId;
@@ -41,18 +43,18 @@ namespace TruckSystem
         {
             OriginalCopy = invoice;
 
-            this.textBox_EditInvoiceCompanyName.Text = invoice.NazivFirme;
             this.dateTimePicker_EditInvoiceDeliveryDate.Value = invoice.DatumIsporuke;
             this.textBox_EditInvoiceBaseValue.Text = invoice.OsnovnaCena;
             this.textBox_EditInvoiceVAT.Text = invoice.PDV;
             this.textBox_EditInvoiceFinalValue.Text = invoice.KonačnaCena;
             this.textBox_EditInvoiceNumber.Text = invoice.BrojFakture;
 
-            // inser into ComboBox and fetch from Invoice class
-            InsertDriversAndVehiclesToComboBox();
+            // insert into ComboBox and fetch from Invoice class
+            InsertDriversVehiclesAndCompaniesToComboBox();
             this.comboBox_EditInvoiceVehicle.Text = invoice.NazivVozila;
             this.comboBox_EditInvoiceDriver.Text = invoice.ImeVozača;
-            
+            this.comboBox_EditInvoiceCompanyName.Text = invoice.NazivFirme;
+
 
             sVoziloId = invoice.VoziloId;
             sDriverId = invoice.DriverId;
@@ -68,6 +70,7 @@ namespace TruckSystem
                 invoice.KonačnaCena == OriginalCopy.KonačnaCena &&
                 invoice.VoziloId == OriginalCopy.VoziloId &&
                 invoice.DriverId == OriginalCopy.DriverId &&
+                invoice.FirmaId == OriginalCopy.FirmaId &&
                 invoice.BrojFakture == OriginalCopy.BrojFakture &&
                 invoice.NazivVozila == OriginalCopy.NazivVozila &&
                 invoice.ImeVozača == OriginalCopy.ImeVozača
@@ -86,7 +89,7 @@ namespace TruckSystem
         {
             Invoices invoice = new Invoices();
 
-            invoice.NazivFirme = this.textBox_EditInvoiceCompanyName.Text;
+            invoice.NazivFirme = this.comboBox_EditInvoiceCompanyName.Text;
             invoice.DatumIsporuke = this.dateTimePicker_EditInvoiceDeliveryDate.Value.Date;
             invoice.OsnovnaCena = this.textBox_EditInvoiceBaseValue.Text;
             invoice.PDV = this.textBox_EditInvoiceVAT.Text;
@@ -96,6 +99,7 @@ namespace TruckSystem
             invoice.ImeVozača = this.comboBox_EditInvoiceDriver.Text;
             invoice.VoziloId = VehiclesAndIdsMap.GetValueOrDefault(this.comboBox_EditInvoiceVehicle.Text.ToString());
             invoice.DriverId = DriversAndIdsMap.GetValueOrDefault(this.comboBox_EditInvoiceDriver.Text.ToString());
+            invoice.FirmaId = CompaniesAndIdsMap.GetValueOrDefault(this.comboBox_EditInvoiceCompanyName.Text.ToString());
 
             invoice.FakturaId = invoiceId;
 
@@ -228,10 +232,66 @@ namespace TruckSystem
             return list;
         }
 
-        private void InsertDriversAndVehiclesToComboBox()
+        private static List<Companies> LoadCompaniesFromCompaniesTable()
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+
+            try
+            {
+                sqlConn.Open();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
+
+            // SQL query
+            string strQuery = "SELECT * FROM Companies";
+            SqlCommand command = new SqlCommand(strQuery, sqlConn);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+            var list = new List<Companies>();
+
+            while (dataReader.Read())
+            {
+                Companies companies = new Companies();
+
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    if (!(dataReader[i] is DBNull))
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                companies.FirmaId = (int)dataReader[i];
+                                break;
+                            case 1:
+                                companies.NazivFirme = dataReader[i].ToString();
+                                break;
+                            case 3:
+                                companies.Grad = dataReader[i].ToString();
+                                break;
+                            case 5:
+                                companies.PIB = dataReader[i].ToString();
+                                break;
+                        }
+                    }
+                }
+
+                list.Add(companies);
+            }
+
+            sqlConn.Close();
+
+            return list;
+        }
+
+        private void InsertDriversVehiclesAndCompaniesToComboBox()
         {
             DriversAndIDs = LoadDriversFromDriversTable();
             VehiclesAndIDs = LoadVehiclesFromTrucksTable();
+            CompaniesAndIDs = LoadCompaniesFromCompaniesTable();
 
             foreach (Drivers item in DriversAndIDs)
             {
@@ -246,6 +306,13 @@ namespace TruckSystem
                 VehiclesAndIdsMap.Add(item.Proizvođač.ToString() + " " + item.TipVozila.ToString() + " - " + item.RegistarskiBroj.ToString(), item.VoziloId.ToString());
             }
             //this.comboBox_EditInvoiceVehicle.Text = "Odaberite vozilo"; // this.comboBox_InvoiceVehicle.Items[0].ToString();
+
+            foreach (Companies item in CompaniesAndIDs)
+            {
+                this.comboBox_EditInvoiceCompanyName.Items.Add(item.NazivFirme.ToString() + " - PIB:" + item.PIB.ToString());
+                CompaniesAndIdsMap.Add(item.NazivFirme.ToString() + " - PIB:" + item.PIB.ToString(), item.FirmaId.ToString());
+            }
+            //this.comboBox_EditInvoiceCompanyName.Text = "Odaberite firmu"; // this.comboBox_EditInvoiceCompanyName.Items[0].ToString();
         }
     }
 }

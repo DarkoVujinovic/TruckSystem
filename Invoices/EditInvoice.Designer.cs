@@ -36,7 +36,6 @@ namespace TruckSystem
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker_EditInvoiceDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox_EditInvoiceCompanyName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,18 +47,19 @@ namespace TruckSystem
             this.textBox_EditInvoiceFinalValue = new System.Windows.Forms.TextBox();
             this.EditInvoice_CancelButton = new System.Windows.Forms.Button();
             this.EditInvoice_ApplyButton = new System.Windows.Forms.Button();
+            this.comboBox_EditInvoiceCompanyName = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox_EditInvoiceCompanyName);
             this.groupBox1.Controls.Add(this.comboBox_EditInvoiceDriver);
             this.groupBox1.Controls.Add(this.comboBox_EditInvoiceVehicle);
             this.groupBox1.Controls.Add(this.textBox_EditInvoiceNumber);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dateTimePicker_EditInvoiceDeliveryDate);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.textBox_EditInvoiceCompanyName);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
@@ -127,13 +127,6 @@ namespace TruckSystem
             this.label8.Size = new System.Drawing.Size(94, 15);
             this.label8.TabIndex = 42;
             this.label8.Text = "Datum isporuke:";
-            // 
-            // textBox_EditInvoiceCompanyName
-            // 
-            this.textBox_EditInvoiceCompanyName.Location = new System.Drawing.Point(146, 33);
-            this.textBox_EditInvoiceCompanyName.Name = "textBox_EditInvoiceCompanyName";
-            this.textBox_EditInvoiceCompanyName.Size = new System.Drawing.Size(184, 23);
-            this.textBox_EditInvoiceCompanyName.TabIndex = 26;
             // 
             // label1
             // 
@@ -230,6 +223,14 @@ namespace TruckSystem
             this.EditInvoice_ApplyButton.UseVisualStyleBackColor = true;
             this.EditInvoice_ApplyButton.Click += new System.EventHandler(this.EditInvoice_ApplyButton_Click_1);
             // 
+            // comboBox_EditInvoiceCompanyName
+            // 
+            this.comboBox_EditInvoiceCompanyName.FormattingEnabled = true;
+            this.comboBox_EditInvoiceCompanyName.Location = new System.Drawing.Point(146, 33);
+            this.comboBox_EditInvoiceCompanyName.Name = "comboBox_EditInvoiceCompanyName";
+            this.comboBox_EditInvoiceCompanyName.Size = new System.Drawing.Size(184, 23);
+            this.comboBox_EditInvoiceCompanyName.TabIndex = 51;
+            // 
             // EditInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -252,7 +253,6 @@ namespace TruckSystem
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox_EditInvoiceCompanyName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -269,5 +269,6 @@ namespace TruckSystem
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox_EditInvoiceVehicle;
         private System.Windows.Forms.ComboBox comboBox_EditInvoiceDriver;
+        private System.Windows.Forms.ComboBox comboBox_EditInvoiceCompanyName;
     }
 }

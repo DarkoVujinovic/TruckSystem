@@ -29,6 +29,7 @@ namespace TruckSystem
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditCompany));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_EditCompanyPhoneNo = new System.Windows.Forms.TextBox();
             this.textBox_EditCompanyBankAcct = new System.Windows.Forms.TextBox();
@@ -46,8 +47,8 @@ namespace TruckSystem
             this.textBox_EditCompanyAddress = new System.Windows.Forms.TextBox();
             this.textBox_EditCompanyOwner = new System.Windows.Forms.TextBox();
             this.textBox_EditCompanyTaxIdNum = new System.Windows.Forms.TextBox();
-            this.AddInvoice_CancelButton = new System.Windows.Forms.Button();
-            this.AddInvoice_ApplyButton = new System.Windows.Forms.Button();
+            this.EditCompany_CancelButton = new System.Windows.Forms.Button();
+            this.EditCompany_ApplyButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,8 +70,8 @@ namespace TruckSystem
             this.groupBox1.Controls.Add(this.textBox_EditCompanyAddress);
             this.groupBox1.Controls.Add(this.textBox_EditCompanyOwner);
             this.groupBox1.Controls.Add(this.textBox_EditCompanyTaxIdNum);
-            this.groupBox1.Controls.Add(this.AddInvoice_CancelButton);
-            this.groupBox1.Controls.Add(this.AddInvoice_ApplyButton);
+            this.groupBox1.Controls.Add(this.EditCompany_CancelButton);
+            this.groupBox1.Controls.Add(this.EditCompany_ApplyButton);
             this.groupBox1.Location = new System.Drawing.Point(18, 11);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(363, 401);
@@ -206,23 +207,25 @@ namespace TruckSystem
             this.textBox_EditCompanyTaxIdNum.Size = new System.Drawing.Size(184, 23);
             this.textBox_EditCompanyTaxIdNum.TabIndex = 30;
             // 
-            // AddInvoice_CancelButton
+            // EditCompany_CancelButton
             // 
-            this.AddInvoice_CancelButton.Location = new System.Drawing.Point(255, 372);
-            this.AddInvoice_CancelButton.Name = "AddInvoice_CancelButton";
-            this.AddInvoice_CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.AddInvoice_CancelButton.TabIndex = 1;
-            this.AddInvoice_CancelButton.Text = "Otkaži";
-            this.AddInvoice_CancelButton.UseVisualStyleBackColor = true;
+            this.EditCompany_CancelButton.Location = new System.Drawing.Point(255, 372);
+            this.EditCompany_CancelButton.Name = "EditCompany_CancelButton";
+            this.EditCompany_CancelButton.Size = new System.Drawing.Size(75, 23);
+            this.EditCompany_CancelButton.TabIndex = 1;
+            this.EditCompany_CancelButton.Text = "Otkaži";
+            this.EditCompany_CancelButton.UseVisualStyleBackColor = true;
+            this.EditCompany_CancelButton.Click += new System.EventHandler(this.EditCompany_CancelButton_Click);
             // 
-            // AddInvoice_ApplyButton
+            // EditCompany_ApplyButton
             // 
-            this.AddInvoice_ApplyButton.Location = new System.Drawing.Point(160, 372);
-            this.AddInvoice_ApplyButton.Name = "AddInvoice_ApplyButton";
-            this.AddInvoice_ApplyButton.Size = new System.Drawing.Size(75, 23);
-            this.AddInvoice_ApplyButton.TabIndex = 0;
-            this.AddInvoice_ApplyButton.Text = "Izmeni";
-            this.AddInvoice_ApplyButton.UseVisualStyleBackColor = true;
+            this.EditCompany_ApplyButton.Location = new System.Drawing.Point(160, 372);
+            this.EditCompany_ApplyButton.Name = "EditCompany_ApplyButton";
+            this.EditCompany_ApplyButton.Size = new System.Drawing.Size(75, 23);
+            this.EditCompany_ApplyButton.TabIndex = 0;
+            this.EditCompany_ApplyButton.Text = "Izmeni";
+            this.EditCompany_ApplyButton.UseVisualStyleBackColor = true;
+            this.EditCompany_ApplyButton.Click += new System.EventHandler(this.EditCompany_ApplyButton_Click);
             // 
             // EditCompany
             // 
@@ -230,6 +233,7 @@ namespace TruckSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 423);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditCompany";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -243,35 +247,23 @@ namespace TruckSystem
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox;
-        private System.Windows.Forms.TextBox textBox_InvoiceNumber;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_EditCompanyName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button EditCompany_ApplyButton;
+        private System.Windows.Forms.TextBox textBox_EditCompanyName;
         private System.Windows.Forms.TextBox textBox_EditCompanyAddress;
-        private System.Windows.Forms.TextBox textBox_InvoiceVAT;
-        private System.Windows.Forms.TextBox textBox_InvoiceFinalValue;
-        private System.Windows.Forms.Button AddInvoice_CancelButton;
-        private System.Windows.Forms.Button AddInvoice_ApplyButton;
-        private System.Windows.Forms.TextBox textBox_CompanyHeadqCity;
-        private System.Windows.Forms.TextBox textBox_CompanyOwner;
-        private System.Windows.Forms.TextBox textBox_CompanyTaxIdNum;
-        private System.Windows.Forms.TextBox textBox_CompanyBankAcct;
-        private System.Windows.Forms.TextBox textBox_CompanyPhoneNo;
-        private System.Windows.Forms.TextBox textBox_CompanyEmail;
         private System.Windows.Forms.TextBox textBox_EditCompanyHeadqCity;
         private System.Windows.Forms.TextBox textBox_EditCompanyOwner;
         private System.Windows.Forms.TextBox textBox_EditCompanyTaxIdNum;
         private System.Windows.Forms.TextBox textBox_EditCompanyBankAcct;
         private System.Windows.Forms.TextBox textBox_EditCompanyPhoneNo;
         private System.Windows.Forms.TextBox textBox_EditCompanyEmail;
+        private System.Windows.Forms.Button EditCompany_CancelButton;
     }
 }

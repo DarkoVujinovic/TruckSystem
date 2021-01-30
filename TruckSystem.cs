@@ -736,7 +736,7 @@ namespace TruckSystem
             // query
             command.CommandText = " INSERT INTO Invoices " +
                                     "(company_name, delivery_date, base_value, vat," +
-                                    " final_value, truck_name, driver_name, invoice_number, driver_id, truck_id)" +
+                                    " final_value, truck_name, driver_name, invoice_number, driver_id, truck_id, company_id)" +
                                     " VALUES ( " +
                                     " @company_name, " +
                                     " @delivery_date, " +
@@ -747,9 +747,11 @@ namespace TruckSystem
                                     " @driver_name, " +
                                     " @invoice_number, " +
                                     " @driver_id, " +
-                                    " @truck_id) ";
+                                    " @truck_id, " +
+                                    " @company_id) ";
 
             //command.Parameters.AddWithValue("@invoice_id", invoice.FakturaId);
+            command.Parameters.AddWithValue("@company_id", invoice.FirmaId);
             command.Parameters.AddWithValue("@truck_id", invoice.VoziloId);
             command.Parameters.AddWithValue("@driver_id", invoice.DriverId);
             command.Parameters.AddWithValue("@invoice_number", invoice.BrojFakture);
@@ -787,7 +789,8 @@ namespace TruckSystem
             SqlCommand command = sqlConn.CreateCommand();
 
             // query
-            command.CommandText = " UPDATE Invoices SET " +
+            command.CommandText =   " UPDATE Invoices SET " +
+                                    " company_id = @company_id, " +
                                     " truck_id = @truck_id, " +
                                     " driver_id =@driver_id, " +
                                     " invoice_number = @invoice_number, " +
@@ -801,6 +804,7 @@ namespace TruckSystem
                                     " WHERE invoice_id = @invoice_id ";
 
             command.Parameters.AddWithValue("@invoice_id", invoice.FakturaId);
+            command.Parameters.AddWithValue("@company_id", invoice.FirmaId);
             command.Parameters.AddWithValue("@truck_id", invoice.VoziloId);
             command.Parameters.AddWithValue("@driver_id", invoice.DriverId);
             command.Parameters.AddWithValue("@invoice_number", invoice.BrojFakture);
@@ -1022,5 +1026,191 @@ namespace TruckSystem
         {
             LoadCompanies();
         }
+
+        private void EditCompany_button_Click(object sender, EventArgs e)
+        {
+            // get row index 
+            int Index = 0;
+
+            try
+            {
+                Index = dataGridView_Companies.CurrentCell.RowIndex;
+                lastSelectedIndexCompanies = Index;
+            }
+            catch
+            {
+                log.Debug("Companies not loaded correctly, please reload invoices.");
+                MessageBox.Show("Molimo prvo učitajte fakture na listu pritiskom na dugme 'Učitaj Firme'. ", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            EditCompany editCompany = new EditCompany(this);
+            Companies companies = new Companies();
+            companies = this.Companies[Index];
+
+            editCompany.LoadSelectedCompany(companies);
+            editCompany.ShowDialog();
+        }
+
+        private void AddNewCompany_button_Click(object sender, EventArgs e)
+        {
+            AddNewCompany addNewCompany = new AddNewCompany(this);
+            addNewCompany.ShowDialog();
+        }
+
+        public void AddCompany(Companies companies)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText = " INSERT INTO Companies " +
+                                    "(company_name, company_address, company_headquaters_city, company_owner," +
+                                    " company_taxIdNumber, company_bank_account, company_phone_number, company_email)" +
+                                    " VALUES ( " +
+                                    " @company_name, " +
+                                    " @company_address, " +
+                                    " @company_headquaters_city, " +
+                                    " @company_owner, " +
+                                    " @company_taxIdNumber, " +
+                                    " @company_bank_account, " +
+                                    " @company_phone_number, " +
+                                    " @company_email) ";
+
+            //command.Parameters.AddWithValue("@company_id", companies.FirmaId);
+            command.Parameters.AddWithValue("@company_email", companies.EMail);
+            command.Parameters.AddWithValue("@company_phone_number", companies.KontaktTelefon);
+            command.Parameters.AddWithValue("@company_bank_account", companies.BrojBankovnogRačuna);
+            command.Parameters.AddWithValue("@company_taxIdNumber", companies.PIB);
+            command.Parameters.AddWithValue("@company_owner", companies.Vlasnik);
+            command.Parameters.AddWithValue("@company_headquaters_city", companies.Grad);
+            command.Parameters.AddWithValue("@company_address", companies.Adresa);
+            command.Parameters.AddWithValue("@company_name", companies.NazivFirme);
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                MessageBox.Show(ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadCompanies();
+        }
+        public void EditCompany(Companies companies)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText =   " UPDATE Companies SET " +
+                                    " company_email = @company_email, " +
+                                    " company_phone_number = @company_phone_number, " +
+                                    " company_bank_account = @company_bank_account, " +
+                                    " company_taxIdNumber = @company_taxIdNumber, " +
+                                    " company_owner = @company_owner, " +
+                                    " company_headquaters_city = @company_headquaters_city, " +
+                                    " company_address = @company_address, " +
+                                    " company_name = @company_name " +
+                                    " WHERE company_id = @company_id ";
+
+            command.Parameters.AddWithValue("@company_id", companies.FirmaId);
+            command.Parameters.AddWithValue("@company_email", companies.EMail);
+            command.Parameters.AddWithValue("@company_phone_number", companies.KontaktTelefon);
+            command.Parameters.AddWithValue("@company_bank_account", companies.BrojBankovnogRačuna);
+            command.Parameters.AddWithValue("@company_taxIdNumber", companies.PIB);
+            command.Parameters.AddWithValue("@company_owner", companies.Vlasnik);
+            command.Parameters.AddWithValue("@company_headquaters_city", companies.Grad);
+            command.Parameters.AddWithValue("@company_address", companies.Adresa);
+            command.Parameters.AddWithValue("@company_name", companies.NazivFirme);
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                MessageBox.Show(ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadCompanies();
+        }
+
+        private void DeleteCompany_button_Click(object sender, EventArgs e)
+        {
+            // get row index 
+            int Index = 0;
+            try
+            {
+                Index = dataGridView_Companies.CurrentCell.RowIndex;
+                lastSelectedIndexCompanies = Index;
+            }
+            catch
+            {
+                log.Debug("Companies not loaded correctly, please reload companies.");
+                MessageBox.Show("Molimo prvo učitajte firme na listu pritiskom na dugme 'Učitaj Firme'. ", "Obaveštenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Companies companies = new Companies();
+            companies = this.Companies[Index];
+
+            DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da želite da obrišete fakturu " + companies.NazivFirme.ToString() + " - PIB:" + companies.PIB.ToString() + " ?", "Upozorenje!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                lastSelectedIndexCompanies = lastSelectedIndexCompanies - 1; // lowered by 1, since last index will be deleted soon, we don't want errors
+                DeleteCompany(companies);
+            }
+
+        }
+
+        private void DeleteCompany(Companies companies)
+        {
+            string connetionString = @"Data Source=localhost;Initial Catalog=TruckData;User ID=sa;Password=pathfinder";
+            SqlConnection sqlConn = new SqlConnection(connetionString);
+            SqlCommand command = sqlConn.CreateCommand();
+
+            // query
+            command.CommandText = "DELETE FROM Companies where company_id = @company_id ";
+            command.Parameters.AddWithValue("@invoice_id", companies.FirmaId);
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                command.Connection.Close();
+                sqlConn.Close();
+                log.Debug("TruckSystem nije uspeo da obriše Firmu iz baze podataka. Molimo pozovite poršku. ");
+                MessageBox.Show("TruckSystem nije uspeo da obriše Firmu iz baze podataka. Molimo kontaktirajte podršku. " + ex.Message);
+            }
+
+            sqlConn.Close();
+            command.Connection.Close();
+
+            //refresh data
+            LoadCompanies();
+        }
+
+        //-------------------------COMPANIES SECTION END-------------------------------//
     }
 }
